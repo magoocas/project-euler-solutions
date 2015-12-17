@@ -1,30 +1,94 @@
 #!/bin/bash
 
-fsharp_text()
+write_comment_block()
 {
-cat > $output_file << EOL
-(*
-  Problem: $number
+	cat >> $output_file << EOL
+    Problem: $number
 
-  Title: $title
+    Title: $title
 
-  Description: $description
+    Description:
+$description
 
-  Url: $page_url
-*)
+    Url: $page_url
+EOL
+}
+
+write_CSharp_code()
+{
+	echo /\* > $output_file
+	write_comment_block
+	echo \*/ >> $output_file
+
+	cat >> $output_file << EOL
+
+namespace ProjectEulerSolutions.CSharp
+{
+    public class Solution${padded_number}
+    {
+        public static int Answer()
+        {
+        }
+    }
+}
 
 EOL
 }
 
-while getopts "n:fr" opt; do
+write_FSharp_code()
+{
+	echo \(* > $output_file
+	write_comment_block
+	echo *\) >> $output_file
+
+cat >> $output_file << EOL
+
+module ProjectEulerSolutions.FSharp.Solution${padded_number}
+
+let Answer =
+
+EOL
+}
+
+exit_script()
+{
+	if [ "$dont_add_to_project" != true ]; then
+		file_in_project=`sed -e 's/ xmlns.*=".*"//g' ${language}/${language}${file_ext}proj | xmlstarlet sel -t -c 'count(/Project/ItemGroup/Compile[@Include="Solution'${padded_number}${file_ext}'"])'`
+	
+		if [ "${file_in_project:0:1}" = "0" ]; then
+			xmlstarlet ed -L -N x="http://schemas.microsoft.com/developer/msbuild/2003" \
+			-s '/x:Project/x:ItemGroup/x:Compile[@Include]/..' -t elem -n "CompileTMP" -v "" \
+			-i "//CompileTMP" -t attr -n "Include" -v "Solution${padded_number}${file_ext}" \
+			-r "//CompileTMP" -v "Compile" \
+			${language}/${language}${file_ext}proj
+		fi
+	fi
+
+	if [ "$open_editor" = true ]; then
+		nano $output_file
+	fi
+	exit 0
+}
+
+while getopts "n:fcrde" opt; do
   case $opt in
     n)
       number=$OPTARG
       ;;
     f)
-      file_type=fsharp
-      file_ext=.fsx
+      language=FSharp
+      file_ext=.fs
       ;;
+    c)
+      language=CSharp
+      file_ext=.cs
+      ;;
+	d)
+	  dont_add_to_project=true
+	  ;;
+	e)
+	  open_editor=true
+	  ;;
     r)
       restart=true
       ;;
@@ -40,23 +104,21 @@ while getopts "n:fr" opt; do
 done
 
 padded_number=`printf "%03d" $number`
-output_file=$file_type/solution-${padded_number}${file_ext}
+output_file=$language/Solution${padded_number}${file_ext}
 
-if [ "$file_type" = "" ]; then
-  echo File type not specified
+if [ "$language" = "" ]; then
+  echo Language not specified
 fi
 
 if [ -f $output_file ] && [ "$restart" != true ]; then
-  nano $output_file
-  exit 0
+	exit_script
 fi
 
 page_url=`echo https://projecteuler.net/problem=$number`
 page_html=`wget -q -O- $page_url | hxnormalize -x`
-description=`echo $page_html | hxselect -i "div.problem_content" | lynx -stdin -dump`
+description=`echo $page_html | hxselect -i "div.problem_content" | lynx -stdin -dump | sed -e  's/^[ \t]*/        /' -e '/^\s*$/d'`
 title=`echo $page_html | hxselect -i "div#content > h2" | lynx -stdin -dump`
 
-eval ${file_type}_text
+eval write_${language}_code
 
-nano $output_file
-exit 0
+exit_script
