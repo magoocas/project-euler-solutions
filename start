@@ -1,0 +1,62 @@
+#!/bin/bash
+
+fsharp_text()
+{
+cat > $output_file << EOL
+(*
+  Problem: $number
+
+  Title: $title
+
+  Description: $description
+
+  Url: $page_url
+*)
+
+EOL
+}
+
+while getopts "n:fr" opt; do
+  case $opt in
+    n)
+      number=$OPTARG
+      ;;
+    f)
+      file_type=fsharp
+      file_ext=.fsx
+      ;;
+    r)
+      restart=true
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+padded_number=`printf "%03d" $number`
+output_file=$file_type/solution-${padded_number}${file_ext}
+
+if [ "$file_type" = "" ]; then
+  echo File type not specified
+fi
+
+if [ -f $output_file ] && [ "$restart" != true ]; then
+  nano $output_file
+  exit 0
+fi
+
+page_url=`echo https://projecteuler.net/problem=$number`
+page_html=`wget -q -O- $page_url | hxnormalize -x`
+description=`echo $page_html | hxselect -i "div.problem_content" | lynx -stdin -dump`
+title=`echo $page_html | hxselect -i "div#content > h2" | lynx -stdin -dump`
+
+eval ${file_type}_text
+
+nano $output_file
+exit 0
