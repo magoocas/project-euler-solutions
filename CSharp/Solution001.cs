@@ -17,10 +17,12 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution001
     {
-        public static int Answer => 
-                Enumerable.Range(0, 1000)
-                    .Where(x => x%3 == 0 || x%5 == 0)
-                    .Sum();
+        public static int Answer()
+        {
+            return Enumerable.Range(0, 1000)
+                .Where(x => x%3 == 0 || x%5 == 0)
+                .Sum();
+        }
     }
 }
 

@@ -18,10 +18,8 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution002
     {
-        public static int Answer
+        public static int Answer()
         {
-            get
-            {
                 int a = 1;
                 int b = 2;
                 int sum = 0;
@@ -39,7 +37,6 @@ namespace ProjectEulerSolutions.CSharp
                 }
 
                 return evenTotal;
-            }
         }
 
         

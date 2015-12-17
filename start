@@ -28,6 +28,7 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static int Answer()
         {
+			return 0;
         }
     }
 }
@@ -45,7 +46,7 @@ cat >> $output_file << EOL
 
 module ProjectEulerSolutions.FSharp.Solution${padded_number}
 
-let Answer =
+let Answer = 0
 
 EOL
 }
@@ -70,7 +71,7 @@ exit_script()
 	exit 0
 }
 
-while getopts "n:fcrde" opt; do
+while getopts "n:fcrdea" opt; do
   case $opt in
     n)
       number=$OPTARG
@@ -83,6 +84,9 @@ while getopts "n:fcrde" opt; do
       language=CSharp
       file_ext=.cs
       ;;
+	a)
+	  all_languages=true
+	  ;;
 	d)
 	  dont_add_to_project=true
 	  ;;
@@ -102,6 +106,20 @@ while getopts "n:fcrde" opt; do
       ;;
   esac
 done
+
+if [ "$all_languages" = true ]; then
+  options="-"
+  if [ "$restart" = true ]; then
+	options=${options}r
+  fi
+  if [ "$dont_add_to_project" = true ]; then
+	options=${options}d
+  fi
+	options=${options}
+  ./start ${options}fn ${number}
+  ./start ${options}cn ${number}
+  exit 0
+fi
 
 padded_number=`printf "%03d" $number`
 output_file=$language/Solution${padded_number}${file_ext}

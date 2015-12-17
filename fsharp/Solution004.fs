@@ -14,5 +14,5 @@
 
 module ProjectEulerSolutions.FSharp.Solution004
 
-let Answer =
+let Answer = 0
 
