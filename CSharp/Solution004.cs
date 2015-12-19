@@ -12,8 +12,8 @@
     Url: https://projecteuler.net/problem=4
 */
 
+using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace ProjectEulerSolutions.CSharp
 {
@@ -21,23 +21,19 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static int Answer()
         {
+            var products = new List<int>();
 
-            int a = 999;
-            int b = 999;
-            bool subA = true;
+            for (int i=100;i<=999;i++)
+                for(int j=100;j<=999;j++)
+                    products.Add(i*j);
 
-            while (a>=100)
+            return products.OrderByDescending(a => a).First(x =>
             {
-                var product = a*b;
-                var testString = product.ToString();
-                if (testString == string.Concat(testString.Reverse()))
-                    return product;
+                var testString = x.ToString();
+                return testString == string.Concat(testString.Reverse());
+            });
 
-                a = subA ? a - 1 : a;
-                b = !subA ? b - 1 : b;
-                subA = !subA;
-            }
-            return 0;
+
         }
     }
 }

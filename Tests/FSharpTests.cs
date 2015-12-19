@@ -14,5 +14,9 @@ namespace Tests
 
         [TestMethod]
         public void TestSolution003() => Assert.AreEqual(Solution003.Answer, Answers.Problem003);
+        [TestMethod]
+        public void TestSolution004() => Assert.AreEqual(Solution004.Answer, Answers.Problem004);
+        [TestMethod]
+        public void TestSolution005() => Assert.AreEqual(Solution005.Answer, Answers.Problem005);
     }
 }

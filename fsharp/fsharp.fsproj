@@ -55,6 +55,7 @@
     <Compile Include="Solution002.fs"/>
     <Compile Include="Solution003.fs"/>
     <Compile Include="Solution004.fs"/>
+    <Compile Include="Solution005.fs"/>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib"/>
