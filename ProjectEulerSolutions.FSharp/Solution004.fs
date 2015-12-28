@@ -12,7 +12,8 @@
     Url: https://projecteuler.net/problem=4
 *)
 
-module ProjectEulerSolutions.FSharp.Solution004
+namespace ProjectEulerSolutions.FSharp
 
-let Answer = 0
+type Solution004() = 
+    static member Answer() = ""
 

@@ -44,9 +44,10 @@ write_FSharp_code()
 
 cat >> $output_file << EOL
 
-module ProjectEulerSolutions.FSharp.Solution${padded_number}
+namespace ProjectEulerSolutions.FSharp.Solution${padded_number}
 
-let Answer = 0
+type Solution${padded_number}() =
+    static member Answer() = 0
 
 EOL
 }
