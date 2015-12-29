@@ -44,7 +44,7 @@ write_FSharp_code()
 
 cat >> $output_file << EOL
 
-namespace ProjectEulerSolutions.FSharp.Solution${padded_number}
+namespace ProjectEulerSolutions.FSharp
 
 type Solution${padded_number}() =
     static member Answer() = 0
@@ -55,14 +55,14 @@ EOL
 exit_script()
 {
 	if [ "$dont_add_to_project" != true ]; then
-		file_in_project=`sed -e 's/ xmlns.*=".*"//g' ${language}/${language}${file_ext}proj | xmlstarlet sel -t -c 'count(/Project/ItemGroup/Compile[@Include="Solution'${padded_number}${file_ext}'"])'`
+		file_in_project=`sed -e 's/ xmlns.*=".*"//g' ProjectEulerSolutions.${language}/ProjectEulerSolutions.${language}${file_ext}proj | xmlstarlet sel -t -c 'count(/Project/ItemGroup/Compile[@Include="Solution'${padded_number}${file_ext}'"])'`
 	
 		if [ "${file_in_project:0:1}" = "0" ]; then
 			xmlstarlet ed -L -N x="http://schemas.microsoft.com/developer/msbuild/2003" \
 			-s '/x:Project/x:ItemGroup/x:Compile[@Include]/..' -t elem -n "CompileTMP" -v "" \
 			-i "//CompileTMP" -t attr -n "Include" -v "Solution${padded_number}${file_ext}" \
 			-r "//CompileTMP" -v "Compile" \
-			${language}/${language}${file_ext}proj
+			ProjectEulerSolutions.${language}/ProjectEulerSolutions.${language}${file_ext}proj
 		fi
 	fi
 
@@ -123,7 +123,7 @@ if [ "$all_languages" = true ]; then
 fi
 
 padded_number=`printf "%03d" $number`
-output_file=$language/Solution${padded_number}${file_ext}
+output_file=ProjectEulerSolutions.$language/Solution${padded_number}${file_ext}
 
 if [ "$language" = "" ]; then
   echo Language not specified

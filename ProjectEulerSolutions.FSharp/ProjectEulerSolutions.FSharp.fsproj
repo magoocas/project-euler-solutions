@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -47,20 +47,21 @@
       </PropertyGroup>
     </Otherwise>
   </Choose>
-  <Import Project="$(FSharpTargetsPath)" />
+  <Import Project="$(FSharpTargetsPath)"/>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="Solution001.fs" />
-    <Compile Include="Solution002.fs" />
-    <Compile Include="Solution003.fs" />
-    <Compile Include="Solution004.fs" />
-    <Compile Include="Solution005.fs" />
+    <Compile Include="AssemblyInfo.fs"/>
+    <Compile Include="Solution001.fs"/>
+    <Compile Include="Solution002.fs"/>
+    <Compile Include="Solution003.fs"/>
+    <Compile Include="Solution004.fs"/>
+    <Compile Include="Solution005.fs"/>
+    <Compile Include="Solution006.fs"/>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
+    <Reference Include="mscorlib"/>
+    <Reference Include="System"/>
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Numerics"/>
     <Reference Include="FSharp.Core">
       <Private>True</Private>
     </Reference>

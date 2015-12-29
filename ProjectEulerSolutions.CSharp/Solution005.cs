@@ -13,7 +13,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
@@ -22,12 +21,23 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static int Answer()
         {
-            //algorithm (hand tested)
-            //1) convert the sequence of 1 - 20 into it's primes
-            //2) count the max number of each prime required to generate any given number
-            //3) multiply all the primes from step 2) together (max count of any given prime)
+            var answer = Enumerable.Range(2, 19).Select(p => 
+                Solution003.GetPrimeFactors(p)
+                    .GroupBy(f => f)
+                    .Select(g => new {
+                        prime = g.Key, 
+                        count = g.Count()
+                    }))
+                .SelectMany(x=> x)
+                .GroupBy(x=> x.prime)
+                .Select(a=> new {
+                    prime = a.Key,
+                    count = a.Max(b=> b.count)
+                })
+                .Aggregate(1, (a,b) => a * (int)Math.Pow(b.prime, b.count));
 
-            return 0;
+
+            return answer;
         }
     }
 }

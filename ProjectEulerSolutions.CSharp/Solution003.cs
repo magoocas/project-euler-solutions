@@ -24,7 +24,7 @@ namespace ProjectEulerSolutions.CSharp
             return (int)primes.Max();
         }
 
-        private static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
+        public static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
         {
             var primes = new List<long>();
             while (potentialPrime * 2 <= numberToFactor)
