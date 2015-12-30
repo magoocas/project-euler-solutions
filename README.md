@@ -1,4 +1,4 @@
-# project-euler-solutions
+# project-euler-solutions [![Build Status](https://travis-ci.org/lukecummings/project-euler-solutions.svg)](https://travis-ci.org/lukecummings/project-euler-solutions)
 Solutions to Project Euler problems
 
 ## start script prerequisites
