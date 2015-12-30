@@ -10,17 +10,17 @@
     Url: https://projecteuler.net/problem=3
 *)
 
-module ProjectEulerSolutions.FSharp.Solution003
+namespace ProjectEulerSolutions.FSharp
 
 open System
 
-let Answer = 
-    let rec GetPrimeFactor (numberToFactor:int64) potentialPrime primes = 
+module Solution003 =
+    let rec GetPrimeFactors potentialPrime primes (numberToFactor:int64) = 
         let quotient, remainder = Math.DivRem(numberToFactor, potentialPrime)
         match remainder with
             
         //Confirmed prime, so add to list and call again with quotient as the new number to factor
-        | 0L -> GetPrimeFactor quotient potentialPrime (potentialPrime::primes)
+        | 0L -> GetPrimeFactors potentialPrime (potentialPrime::primes) quotient
             
         // Prime number is now too large to be divided into the numberToFactor which means the numberToFactor
         // is actually the last prime, so we can just add it to the list
@@ -28,12 +28,12 @@ let Answer =
 
         // This will handle the case when the original number to be factored is odd, which means we 
         // know we can skip all remaining even numbers since they cannot be primes
-        | _ when potentialPrime = 2L -> GetPrimeFactor numberToFactor 3L primes
+        | _ when potentialPrime = 2L -> GetPrimeFactors 3L primes numberToFactor
 
         // Once we fall to this case we know because of the previous match, we will always have an odd
         // potential prime. Since it failed to test as a factor we should increase by 2 and try again
-        | _ -> GetPrimeFactor numberToFactor (potentialPrime + 2L) primes
+        | _ -> GetPrimeFactors (potentialPrime + 2L) primes numberToFactor
 
-    // Now we finally set answer with a call to GetPrimeFactor with the problem specifics
-    GetPrimeFactor 600851475143L 2L []
-    |> Seq.max
+    let Answer =
+        // Now we finally set answer with a call to GetPrimeFactor with the problem specifics
+        GetPrimeFactors 2L [] 600851475143L |> Seq.max

@@ -19,7 +19,7 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution004
     {
-        public static int Answer()
+        public static object Answer()
         {
             var products = new List<int>();
 

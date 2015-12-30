@@ -18,13 +18,13 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution003
     {
-        public static int Answer()
+        public static object Answer()
         {
             var primes = GetPrimeFactors(600851475143);
             return (int)primes.Max();
         }
 
-        private static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
+        public static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
         {
             var primes = new List<long>();
             while (potentialPrime * 2 <= numberToFactor)

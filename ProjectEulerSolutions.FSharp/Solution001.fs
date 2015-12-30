@@ -1,4 +1,4 @@
-/*
+(*
     Problem: 1
 
     Title: Multiples of 3 and 5
@@ -9,20 +9,12 @@
         Find the sum of all the multiples of 3 or 5 below 1000.
 
     Url: https://projecteuler.net/problem=1
-*/
+*)
+namespace ProjectEulerSolutions.FSharp
 
-using System.Linq;
-
-namespace ProjectEulerSolutions.CSharp
-{
-    public class Solution001
-    {
-        public static int Answer()
-        {
-            return Enumerable.Range(0, 1000)
-                .Where(x => x%3 == 0 || x%5 == 0)
-                .Sum();
-        }
-    }
-}
+module Solution001 =
+    let Answer =
+        [0..1000-1]
+            |> List.filter (fun x -> (x % 3 = 0) || (x % 5 = 0))
+            |> List.sum
 
