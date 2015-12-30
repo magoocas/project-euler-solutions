@@ -25,7 +25,7 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution006
     {
-        public static long Answer()
+        public static object Answer()
         {
             var sumOfSquares = Enumerable.Range(1, 100)
                 .Select(x => (long)x * (long)x)

@@ -52,9 +52,9 @@ namespace ProjectEulerSolutions.Tests
 		[Test, TestCaseSource("TestCases")]
 		public string TestFSharpSoution(string solutionName)
 		{
-			var answer = _fSharpSolutions[solutionName]
-				.GetMethod("Answer")
-				.Invoke(null, null);
+            var answer = _fSharpSolutions[solutionName]
+                .GetProperty("Answer")
+                .GetValue(null,null);
 
 			return answer.ToString();
 		}

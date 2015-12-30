@@ -14,6 +14,16 @@
 
 namespace ProjectEulerSolutions.FSharp
 
-type Solution004() = 
-    static member Answer() = ""
+open System
+
+module Solution004 = 
+
+    let IsPalindrome number =
+        let originalNumber = number.ToString()
+        originalNumber |> Seq.rev |> String.Concat |> fun reversedNumber -> reversedNumber = originalNumber
+
+    let Answer =
+        [for i in 100..1000 do for j in 100..1000 -> i*j]
+        |> Seq.sortByDescending (fun a -> a)
+        |> Seq.find IsPalindrome
 

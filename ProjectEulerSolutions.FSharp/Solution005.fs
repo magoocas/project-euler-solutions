@@ -17,7 +17,20 @@
 
 namespace ProjectEulerSolutions.FSharp
 
-type Solution005() = 
-    static member Answer() = ""
+open System
+
+module Solution005 = 
+    let Answer = 
+        [2L..20L]
+        |> Seq.map (Solution003.GetPrimeFactors 2L [])
+        |> Seq.map(fun factors -> 
+        factors
+            |> Seq.groupBy(fun factor -> factor) 
+            |> Seq.map(fun (factor, factorGroup) -> (factor, factorGroup |> Seq.length)))
+        |> Seq.collect (fun factorGrouping -> factorGrouping)
+        |> Seq.groupBy (fun (factor, countOfFactor) -> factor)
+        |> Seq.map (fun (factor, factorGroup) -> (factor, factorGroup |> Seq.max))
+        |> Seq.fold (fun acc (factor, (factor2, maxCountOfFactor)) -> acc * (pown factor maxCountOfFactor)) 1L
+
 
 

@@ -12,10 +12,9 @@
 *)
 namespace ProjectEulerSolutions.FSharp
 
-type Solution001() =
-    static member Answer() =
+module Solution001 =
+    let Answer =
         [0..1000-1]
             |> List.filter (fun x -> (x % 3 = 0) || (x % 5 = 0))
             |> List.sum
-            |> sprintf "%d"
 

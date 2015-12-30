@@ -18,7 +18,7 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution003
     {
-        public static int Answer()
+        public static object Answer()
         {
             var primes = GetPrimeFactors(600851475143);
             return (int)primes.Max();

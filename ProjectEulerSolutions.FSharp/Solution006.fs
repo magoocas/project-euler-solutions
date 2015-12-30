@@ -23,8 +23,8 @@ namespace ProjectEulerSolutions.FSharp
 
 open System
 
-type Solution006() =
-    static member Answer() =
+module Solution006 =
+    let Answer =
         let sumOfSquares = [1L..100L] |> List.fold (fun acc x -> acc + x*x) 0L
         let squareOfSum = [1L..100L] |> List.fold (fun acc x -> acc + x) 0L |> fun x -> x*x
         Math.Abs(sumOfSquares - squareOfSum)

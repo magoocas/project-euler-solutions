@@ -19,7 +19,7 @@ namespace ProjectEulerSolutions.CSharp
 {
     public class Solution005
     {
-        public static int Answer()
+        public static object Answer()
         {
             var answer = Enumerable.Range(2, 19).Select(p => 
                 Solution003.GetPrimeFactors(p)
