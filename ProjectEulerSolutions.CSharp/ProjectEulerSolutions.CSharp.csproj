@@ -47,6 +47,7 @@
     <Compile Include="Solution004.cs"/>
     <Compile Include="Solution005.cs"/>
     <Compile Include="Solution006.cs"/>
+    <Compile Include="Solution007.cs"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
