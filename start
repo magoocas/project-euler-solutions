@@ -46,8 +46,8 @@ cat >> $output_file << EOL
 
 namespace ProjectEulerSolutions.FSharp
 
-type Solution${padded_number}() =
-    static member Answer() = 0
+module Solution${padded_number} =
+    let Answer = 0
 
 EOL
 }

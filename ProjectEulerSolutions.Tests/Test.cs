@@ -12,51 +12,40 @@ namespace ProjectEulerSolutions.Tests
 	[TestFixture]
 	public class Tests
 	{
-		static Dictionary<string, Type> _cSharpSolutions;
-		static Dictionary<string, Type> _fSharpSolutions;
-
 		static IEnumerable TestCases()
-		{
-			var testCases = new CsvReader(new StreamReader("TestCases")).GetRecords<SolutionTestCase>();
+        {
+            var answers = new CsvReader(new StreamReader("TestCases"))
+                .GetRecords<SolutionTestCase>()
+                .ToDictionary(s=>s.SolutionName,s=>s.Answer);
 
-			foreach (var test in testCases)
-				yield return new TestCaseData(test.SolutionName).Returns(test.Answer);
-		}
+            return new[]
+            { 
+                "ProjectEulerSolutions.CSharp.dll", 
+                "ProjectEulerSolutions.FSharp.dll" 
+            }
+                .Select(Assembly.LoadFrom)
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.Name.StartsWith("Solution"))
+                .Select(type =>
+                {
+                    Func<object> solution;
+                    var method = type.GetMethod("Answer");
+                    if (method != null)
+                        solution = () => method.Invoke(null, null);
+                    else
+                        solution = () => type.GetProperty("Answer").GetValue(null);
+                        
+                    return new TestCaseData(solution)
+                        .SetName(type.Namespace + "_" + type.Name)
+                        .Returns(answers[type.Name]);
+                });
+        }
 
-		[TestFixtureSetUp]
-		public void TestSetup()
-		{
-			_cSharpSolutions = Assembly.LoadFrom("ProjectEulerSolutions.CSharp.dll")
-				.GetTypes()
-				.Where(t => t.Name.StartsWith("Solution"))
-				.ToDictionary(t => t.Name, t => t);
-
-			_fSharpSolutions = Assembly.LoadFrom("ProjectEulerSolutions.FSharp.dll")
-				.GetTypes()
-				.Where(t => t.Name.StartsWith("Solution"))
-				.ToDictionary(t => t.Name, t => t);
-		}
-
-
-		[Test, TestCaseSource("TestCases")]
-		public string TestCSharpSoution(string solutionName)
-		{
-			var answer = _cSharpSolutions[solutionName]
-				.GetMethod("Answer")
-				.Invoke(null, null);
-
-			return answer.ToString();
-
-		}
 
 		[Test, TestCaseSource("TestCases")]
-		public string TestFSharpSoution(string solutionName)
+        public string TestSoution(Func<object> solution)
 		{
-            var answer = _fSharpSolutions[solutionName]
-                .GetProperty("Answer")
-                .GetValue(null,null);
-
-			return answer.ToString();
+            return solution().ToString();
 		}
 
 	}
