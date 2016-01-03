@@ -16,7 +16,7 @@ namespace ProjectEulerSolutions.Tests
         {
             var answers = new CsvReader(new StreamReader("TestCases"))
                 .GetRecords<SolutionTestCase>()
-                .ToDictionary(s=>s.SolutionName,s=>s.Answer);
+                .ToDictionary(s => s.SolutionName, s => s.Answer);
 
             return new[]
             { 
@@ -34,18 +34,25 @@ namespace ProjectEulerSolutions.Tests
                         solution = () => method.Invoke(null, null);
                     else
                         solution = () => type.GetProperty("Answer").GetValue(null);
+
+                    if (!answers.ContainsKey(type.Name))
+                        answers.Add(type.Name, "No Answer In TestCases File!");
                         
-                    return new TestCaseData(solution)
-                        .SetName(type.Namespace + "_" + type.Name)
-                        .Returns(answers[type.Name]);
+                    return new TestCaseData(solution, type, answers[type.Name])
+                    .SetName($"{type.Namespace}_{type.Name}")
+                    .Returns(answers[type.Name]);
                 });
         }
 
 
 		[Test, TestCaseSource("TestCases")]
-        public string TestSoution(Func<object> solution)
+        public string TestSoution(Func<object> solution, Type solutionType, string answer)
 		{
-            return solution().ToString();
+            var result = solution().ToString();
+
+            Console.WriteLine($"{solutionType.Namespace.Split('.')[1]} - {solutionType.Name} returned {result}, expected {answer}.");
+
+            return result;
 		}
 
 	}
