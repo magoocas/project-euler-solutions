@@ -14,14 +14,58 @@
     Url: https://projecteuler.net/problem=7
 */
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
 {
     public static class Solution007
     {
-        public static int Answer()
+        public static object Answer()
         {
             return GetNthPrime(10001, 200000);
+        }
+
+        public static IEnumerable<long> GetPrimes(long searchLimit)
+        {
+            return GetPrimes(searchLimit, p=>true);
+        }
+
+        /// <summary>
+        /// Enumerates the primes, so long as predicate returns true
+        /// </summary>
+        /// <returns>The primes.</returns>
+        /// <param name="searchLimit">Search limit.</param>
+        /// <param name="predicate">function that takes the current prime number n, and returns true or false</param>
+        public static IEnumerable<long> GetPrimes(long searchLimit, Func<long, bool> predicate)
+        {
+            var prime = 2L;
+            var primeCount = 1L;
+
+            var sieve = new bool[searchLimit+1L];
+
+            while (predicate(primeCount))
+            {
+                yield return prime;
+
+                for (long multiple = prime * 2L; multiple < sieve.LongLength; multiple += prime)
+                    sieve[multiple] = true;
+
+                long possiblePrime;
+                for (possiblePrime = prime+1; possiblePrime < sieve.LongLength; possiblePrime++)
+                {
+                    if (!sieve[possiblePrime])
+                    {
+                        prime = possiblePrime;
+                        primeCount++;
+                        break;
+                    }
+                }
+                if (possiblePrime == sieve.LongLength)
+                    break;
+            }
+            
         }
 
         /// <summary>
@@ -30,33 +74,13 @@ namespace ProjectEulerSolutions.CSharp
         /// <returns>The nth prime, if prime less than searchLimit. Otherwise returns -1.</returns>
         /// <param name="n">Nth Prime</param>
         /// <param name="searchLimit">Limit at which to stop searching for prime.</param>
-        public static int GetNthPrime(int n, int searchLimit)
+        public static long GetNthPrime(long n, long searchLimit)
         {
-            var prime = 2;
-            var primeCount = 1;
 
-            var sieve = new bool[searchLimit+1];
-            for (int i = 0; i < sieve.Length; i++)
-                sieve[i] = true;  
-            
-            while (primeCount < n)
-            {
-                for (int multiple = prime * 2; multiple < sieve.Length; multiple += prime)
-                    sieve[multiple] = false;
+            var primes = GetPrimes(searchLimit, p => p <= n).ToList();
 
-                int possiblePrime;
-                for (possiblePrime = prime+1; possiblePrime < sieve.Length; possiblePrime++)
-                {
-                    if (sieve[possiblePrime])
-                    {
-                        prime = possiblePrime;
-                        primeCount++;
-                        break;
-                    }
-                }
-            }
+            return primes.Count()==n ? primes.Last() : -1;
 
-            return primeCount == n ? prime : -1;
         }
     }
 }
