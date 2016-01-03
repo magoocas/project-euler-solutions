@@ -24,9 +24,9 @@ write_CSharp_code()
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution${padded_number}
+    public static class Solution${padded_number}
     {
-        public static int Answer()
+        public static object Answer()
         {
 			return 0;
         }
