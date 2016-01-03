@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution004
+    public static class Solution004
     {
         public static object Answer()
         {

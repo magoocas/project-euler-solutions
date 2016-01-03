@@ -17,7 +17,7 @@ using System;
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution007
+    public static class Solution007
     {
         public static int Answer()
         {

@@ -16,7 +16,7 @@
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution002
+    public static class Solution002
     {
         public static object Answer()
         {

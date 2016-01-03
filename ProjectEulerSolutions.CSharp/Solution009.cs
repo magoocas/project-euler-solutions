@@ -21,11 +21,26 @@
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution009
+    public static class Solution009
     {
         public static object Answer()
         {
-			return 0;
+            int sum = 1000, 
+                a = 1, 
+                b = a, 
+                c = sum - (a+b);
+
+            while (b < c)
+            {
+                while (++b < (c = sum - (a + b)))
+                {
+                    if (a * a + b * b == c * c)
+                        return a * b * c;
+                }
+                b = ++a;
+            }
+                
+			return -1;
         }
     }
 }

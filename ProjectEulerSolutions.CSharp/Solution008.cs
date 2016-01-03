@@ -40,7 +40,7 @@ using System.Collections.Generic;
 
 namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution008
+    public static class Solution008
     {
         public static string BigNumber = 
 @"73167176531330624919225119674426574742355349194934
