@@ -45,12 +45,12 @@ namespace ProjectEulerSolutions.Tests
         }
 
 
-		[Test, TestCaseSource("TestCases")]
+		[Test, TestCaseSource(nameof(TestCases))]
         public string TestSoution(Func<object> solution, Type solutionType, string answer)
 		{
             var result = solution().ToString();
 
-            Console.WriteLine($"{solutionType.Namespace.Split('.')[1]} - {solutionType.Name} returned {result}, expected {answer}.");
+            //Console.WriteLine($"{solutionType.Namespace.Split('.')[1]} - {solutionType.Name} returned {result}, expected {answer}.");
 
             return result;
 		}
