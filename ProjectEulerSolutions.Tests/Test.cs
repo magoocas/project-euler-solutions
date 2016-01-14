@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -48,9 +49,12 @@ namespace ProjectEulerSolutions.Tests
 		[Test, TestCaseSource(nameof(TestCases))]
         public string TestSoution(Func<object> solution, Type solutionType, string answer)
 		{
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             var result = solution().ToString();
+            stopwatch.Stop();
 
-            //Console.WriteLine($"{solutionType.Namespace.Split('.')[1]} - {solutionType.Name} returned {result}, expected {answer}.");
+            Console.WriteLine($"Execution Time: {stopwatch.ElapsedMilliseconds} ms.");
 
             return result;
 		}
