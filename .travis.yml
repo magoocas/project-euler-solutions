@@ -1,8 +1,7 @@
 language: csharp
-solution: ProjectEulerSolutions.sln
 install:
-  - nuget restore ProjectEulerSolutions.sln
+  - nuget restore dotnet/ProjectEulerSolutions.sln
   - nuget install NUnit.Runners -Version 3.0.1 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release ProjectEulerSolutions.sln
-  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./ProjectEulerSolutions.Tests/bin/Release/ProjectEulerSolutions.Tests.dll
+  - xbuild /p:Configuration=Release dotnet/ProjectEulerSolutions.sln
+  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./dotnet/ProjectEulerSolutions.Tests/bin/Release/ProjectEulerSolutions.Tests.dll
