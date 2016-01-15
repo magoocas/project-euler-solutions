@@ -13,14 +13,14 @@
 
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution001
+    public class Solution001 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             return Enumerable.Range(0, 1000)
-                .Where(x => x%3 == 0 || x%5 == 0)
+                .Where(x => x % 3 == 0 || x % 5 == 0)
                 .Sum();
         }
     }

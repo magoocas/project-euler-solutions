@@ -15,11 +15,11 @@
 using System;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution005
+    public class Solution005 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var answer = Enumerable.Range(2, 19).Select(p =>
                 Solution003.GetPrimeFactors(p)

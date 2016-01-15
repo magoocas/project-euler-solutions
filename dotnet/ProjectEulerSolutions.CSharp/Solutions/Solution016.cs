@@ -15,11 +15,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution016
+    public class Solution016 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             long number = 2;
             long power = 1000;

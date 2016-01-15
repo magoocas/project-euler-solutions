@@ -15,11 +15,11 @@
     Url: https://projecteuler.net/problem=15
 */
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution015
+    public class Solution015 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var size = 20;
             var paths = new long[size + 1];

@@ -22,11 +22,11 @@
 using System;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution006
+    public class Solution006 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var sumOfSquares = Enumerable.Range(1, 100)
                 .Select(x => (long) x*(long) x)

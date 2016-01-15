@@ -14,11 +14,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution003
+    public class Solution003 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var primes = GetPrimeFactors(600851475143);
             return (int) primes.Max();

@@ -14,11 +14,11 @@
     Url: https://projecteuler.net/problem=2
 */
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution002
+    public class Solution002 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var a = 1;
             var b = 2;
