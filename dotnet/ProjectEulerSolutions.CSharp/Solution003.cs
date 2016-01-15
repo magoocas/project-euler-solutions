@@ -21,16 +21,16 @@ namespace ProjectEulerSolutions.CSharp
         public static object Answer()
         {
             var primes = GetPrimeFactors(600851475143);
-            return (int)primes.Max();
+            return (int) primes.Max();
         }
 
         public static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
         {
             var primes = new List<long>();
-            while (potentialPrime * 2 <= numberToFactor)
+            while (potentialPrime*2 <= numberToFactor)
             {
                 long remainder;
-                long quotient = Math.DivRem(numberToFactor, potentialPrime, out remainder);
+                var quotient = Math.DivRem(numberToFactor, potentialPrime, out remainder);
 
                 if (remainder == 0)
                 {
@@ -50,4 +50,3 @@ namespace ProjectEulerSolutions.CSharp
         }
     }
 }
-

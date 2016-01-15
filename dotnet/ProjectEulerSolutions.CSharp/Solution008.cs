@@ -1,4 +1,4 @@
-/*
+﻿/*
     Problem: 8
 
     Title: Largest product in a series
@@ -34,16 +34,15 @@
     Url: https://projecteuler.net/problem=8
 */
 
-using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
 {
     public static class Solution008
     {
-        public static string BigNumber = 
-@"73167176531330624919225119674426574742355349194934
+        public static string BigNumber =
+            @"73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
 12540698747158523863050715693290963295227443043557
@@ -62,19 +61,18 @@ namespace ProjectEulerSolutions.CSharp
 07198403850962455444362981230987879927244284909188
 84580156166097919133875499200524063689912560717606
 05886116467109405077541002256983155200055935729725
-71636269561882670428252483600823257530420752963450".Replace("\n","");
-        
+71636269561882670428252483600823257530420752963450".Replace("\n", "");
+
         public static object Answer()
         {
-            int windowSize = 13;
-            List<long> products = new List<long>();
+            var windowSize = 13;
+            var products = new List<long>();
 
-            for (int i = 0; i < BigNumber.Length-windowSize; i++)
+            for (var i = 0; i < BigNumber.Length - windowSize; i++)
             {
-                products.Add(BigNumber.Substring(i,windowSize).Aggregate(1L, (acc,c) => long.Parse(c.ToString()) * acc));
+                products.Add(BigNumber.Substring(i, windowSize).Aggregate(1L, (acc, c) => long.Parse(c.ToString())*acc));
             }
             return products.Max();
         }
     }
 }
-

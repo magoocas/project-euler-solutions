@@ -134,8 +134,10 @@ if [ -f $output_file ] && [ "$restart" != true ]; then
 fi
 
 page_url=`echo https://projecteuler.net/problem=$number`
-page_html=`wget -q -O- $page_url | hxnormalize -x`
-description=`echo $page_html | hxselect -i "div.problem_content" | xmlstarlet ed -a '//*[@style]/br' -t text -n test -v '&nbsp;' | sed -e 's/<\(.*\) style[^>]*>/<\1>\&nbsp;/' -e 's/\&amp;nbsp;/\&nbsp;/' | w3m -dump -T text/html | sed -r 's/^\s+/    /' | sed -e 's/^/        /'`
+page_html=`wget -q -O- $page_url | hxselect -i "div.problem_content"`
+fixed_html=`echo $page_html | xmlstarlet ed -a '//*[@style]/br' -t text -n test -v '&nbsp;' | sed -e 's/<\(.*\) style[^>]*>/<\1>\&nbsp;/g' -e 's/\&amp;nbsp;/\&nbsp;/g'`
+description=`echo $fixed_html | w3m -dump -T text/html | sed -r 's/^\s+/    /g' | sed -e 's/^/        /g'`
+echo $fixed_html
 title=`echo $page_html | hxselect -i "div#content > h2" | xml2asc | lynx -stdin -dump`
 
 eval write_${language}_code

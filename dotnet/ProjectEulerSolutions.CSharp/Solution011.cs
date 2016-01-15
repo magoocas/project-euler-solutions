@@ -41,9 +41,8 @@ namespace ProjectEulerSolutions.CSharp
 {
     public static class Solution011
     {
-
-        public static string Numbers = 
-@"08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+        public static string Numbers =
+            @"08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -63,44 +62,44 @@ namespace ProjectEulerSolutions.CSharp
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48";
-        
+
         public static object Answer()
         {
-            var matrix = Numbers.Split('\n').Select(rowString => 
+            var matrix = Numbers.Split('\n').Select(rowString =>
                 rowString.Split(' ').Select(n => int.Parse(n)).ToArray()
-                         ).ToArray();
-			
+                ).ToArray();
+
             var productCount = 4;
             var maxProduct = 0;
 
             var rows = matrix.Length;
             var columns = matrix[0].Length;
 
-            for (int row = 0; row < rows; row++)
+            for (var row = 0; row < rows; row++)
             {
-                for (int column = 0; column < columns; column++)
+                for (var column = 0; column < columns; column++)
                 {
                     var currentProduct = matrix[row][column];
                     if (column + productCount <= columns)
-                        for (int k = 1; k < productCount; k++)
+                        for (var k = 1; k < productCount; k++)
                             currentProduct *= matrix[row][column + k];
                     maxProduct = currentProduct > maxProduct ? currentProduct : maxProduct;
 
                     currentProduct = matrix[row][column];
                     if (row + productCount <= rows)
-                        for (int k = 1; k < productCount; k++)
+                        for (var k = 1; k < productCount; k++)
                             currentProduct *= matrix[row + k][column];
                     maxProduct = currentProduct > maxProduct ? currentProduct : maxProduct;
 
                     currentProduct = matrix[row][column];
                     if (column + productCount <= columns && row + productCount <= rows)
-                        for (int k = 1; k < productCount; k++)
+                        for (var k = 1; k < productCount; k++)
                             currentProduct *= matrix[row + k][column + k];
                     maxProduct = currentProduct > maxProduct ? currentProduct : maxProduct;
 
                     currentProduct = matrix[row][column];
                     if (column - productCount >= 0 && row + productCount <= rows)
-                        for (int k = 1; k < productCount; k++)
+                        for (var k = 1; k < productCount; k++)
                             currentProduct *= matrix[row + k][column - k];
                     maxProduct = currentProduct > maxProduct ? currentProduct : maxProduct;
                 }
@@ -110,4 +109,3 @@ namespace ProjectEulerSolutions.CSharp
         }
     }
 }
-

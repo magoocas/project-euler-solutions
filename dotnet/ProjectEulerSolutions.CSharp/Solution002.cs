@@ -20,26 +20,23 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static object Answer()
         {
-                int a = 1;
-                int b = 2;
-                int sum = 0;
-                int evenTotal = 0;
+            var a = 1;
+            var b = 2;
+            var sum = 0;
+            var evenTotal = 0;
 
-                while (b < 4000000)
+            while (b < 4000000)
+            {
+                if (b%2 == 0)
                 {
-                    if (b%2 == 0)
-                    {
-                        evenTotal += b;
-                    }
-                    sum = a + b;
-                    a = b;
-                    b = sum;
+                    evenTotal += b;
                 }
+                sum = a + b;
+                a = b;
+                b = sum;
+            }
 
-                return evenTotal;
+            return evenTotal;
         }
-
-        
     }
 }
-

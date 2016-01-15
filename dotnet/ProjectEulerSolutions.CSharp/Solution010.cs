@@ -12,6 +12,7 @@
 
     Url: https://projecteuler.net/problem=10
 */
+
 using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
@@ -24,4 +25,3 @@ namespace ProjectEulerSolutions.CSharp
         }
     }
 }
-

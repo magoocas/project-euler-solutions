@@ -15,9 +15,6 @@
     Url: https://projecteuler.net/problem=15
 */
 
-using System;
-using System.Collections.Generic;
-
 namespace ProjectEulerSolutions.CSharp
 {
     public static class Solution015
@@ -27,12 +24,11 @@ namespace ProjectEulerSolutions.CSharp
             var size = 20;
             var paths = new long[size + 1];
             paths[0] = 1;
-            for (int i = 0; i <= size; i++)
-                for (int j = 0; j < size; j++)
+            for (var i = 0; i <= size; i++)
+                for (var j = 0; j < size; j++)
                     paths[j + 1] += paths[j];
 
             return paths[size];
         }
     }
 }
-

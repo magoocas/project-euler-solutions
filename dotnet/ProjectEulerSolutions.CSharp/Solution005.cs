@@ -21,24 +21,25 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static object Answer()
         {
-            var answer = Enumerable.Range(2, 19).Select(p => 
+            var answer = Enumerable.Range(2, 19).Select(p =>
                 Solution003.GetPrimeFactors(p)
                     .GroupBy(f => f)
-                    .Select(g => new {
-                        prime = g.Key, 
+                    .Select(g => new
+                    {
+                        prime = g.Key,
                         count = g.Count()
                     }))
-                .SelectMany(x=> x)
-                .GroupBy(x=> x.prime)
-                .Select(a=> new {
+                .SelectMany(x => x)
+                .GroupBy(x => x.prime)
+                .Select(a => new
+                {
                     prime = a.Key,
-                    count = a.Max(b=> b.count)
+                    count = a.Max(b => b.count)
                 })
-                .Aggregate(1, (a,b) => a * (int)Math.Pow(b.prime, b.count));
+                .Aggregate(1, (a, b) => a*(int) Math.Pow(b.prime, b.count));
 
 
             return answer;
         }
     }
 }
-

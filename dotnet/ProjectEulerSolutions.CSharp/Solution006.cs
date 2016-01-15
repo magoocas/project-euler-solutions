@@ -1,4 +1,4 @@
-/*
+﻿/*
     Problem: 6
 
     Title: Sum square difference
@@ -18,8 +18,9 @@
 
     Url: https://projecteuler.net/problem=6
 */
-using System.Linq;
+
 using System;
+using System.Linq;
 
 namespace ProjectEulerSolutions.CSharp
 {
@@ -28,14 +29,13 @@ namespace ProjectEulerSolutions.CSharp
         public static object Answer()
         {
             var sumOfSquares = Enumerable.Range(1, 100)
-                .Select(x => (long)x * (long)x)
+                .Select(x => (long) x*(long) x)
                 .Aggregate((a, b) => a + b);
 
-            var squareOfSums = (long)Math.Pow(Enumerable.Range(1, 100)
-                .Aggregate(0L,(a, b) => a + (long)b), 2);
+            var squareOfSums = (long) Math.Pow(Enumerable.Range(1, 100)
+                .Aggregate(0L, (a, b) => a + (long) b), 2);
 
             return Math.Abs(squareOfSums - sumOfSquares);
         }
     }
 }
-

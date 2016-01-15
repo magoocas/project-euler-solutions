@@ -25,23 +25,22 @@ namespace ProjectEulerSolutions.CSharp
     {
         public static object Answer()
         {
-            int sum = 1000, 
-                a = 1, 
-                b = a, 
-                c = sum - (a+b);
+            int sum = 1000,
+                a = 1,
+                b = a,
+                c = sum - (a + b);
 
             while (b < c)
             {
                 while (++b < (c = sum - (a + b)))
                 {
-                    if (a * a + b * b == c * c)
-                        return a * b * c;
+                    if (a*a + b*b == c*c)
+                        return a*b*c;
                 }
                 b = ++a;
             }
-                
-			return -1;
+
+            return -1;
         }
     }
 }
-

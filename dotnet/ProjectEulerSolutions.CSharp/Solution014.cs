@@ -25,26 +25,19 @@
     Url: https://projecteuler.net/problem=14
 */
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
 namespace ProjectEulerSolutions.CSharp
 {
     public static class Solution014
     {
         public static object Answer()
         {
-            var stopwatch = new Stopwatch();
-            stopwatch.Start();
             var maxDistance = 0;
             long maxNumber = 1;
 
-            for (int i = 2; i < 1000000; i++)
+            for (var i = 2; i < 1000000; i++)
             {
                 long next = i;
-                int distance = 0;
+                var distance = 0;
                 while ((next = (next & 1) == 0 ? next >> 1 : next*3 + 1) != 1)
                     distance++;
                 if (distance > maxDistance)
@@ -53,10 +46,7 @@ namespace ProjectEulerSolutions.CSharp
                     maxNumber = i;
                 }
             }
-            stopwatch.Stop();
-            Console.WriteLine($"Took {stopwatch.ElapsedMilliseconds} ms.");
             return maxNumber;
         }
     }
 }
-
