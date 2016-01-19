@@ -20,14 +20,13 @@
     Url: https://projecteuler.net/problem=17
 */
 
-using System;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution017
+    public class Solution017 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var ones = new[]
             {

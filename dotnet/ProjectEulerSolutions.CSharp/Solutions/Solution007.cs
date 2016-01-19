@@ -18,11 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution007
+    public class Solution007 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             return GetNthPrime(10001, 200000);
         }

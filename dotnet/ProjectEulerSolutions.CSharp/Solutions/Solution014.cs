@@ -1,4 +1,4 @@
-/*
+﻿/*
     Problem: 14
 
     Title: Longest Collatz sequence
@@ -25,11 +25,11 @@
     Url: https://projecteuler.net/problem=14
 */
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution014
+    public class Solution014 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var maxDistance = 0;
             long maxNumber = 1;

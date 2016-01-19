@@ -37,9 +37,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution008
+    public class Solution008 : SolutionBase
     {
         public static string BigNumber =
             @"73167176531330624919225119674426574742355349194934
@@ -63,7 +63,7 @@ namespace ProjectEulerSolutions.CSharp
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450".Replace("\n", "");
 
-        public static object Answer()
+        public override object Answer()
         {
             var windowSize = 13;
             var products = new List<long>();

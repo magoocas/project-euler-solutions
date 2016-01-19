@@ -19,11 +19,11 @@
     Url: https://projecteuler.net/problem=9
 */
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution009
+    public class Solution009 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             int sum = 1000,
                 a = 1,

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -39,40 +39,52 @@
       <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System"/>
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Numerics"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    <Reference Include="Microsoft.CSharp"/>
-    <Reference Include="System.Data"/>
-    <Reference Include="System.Net.Http"/>
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs"/>
-    <Compile Include="Solution001.cs"/>
-    <Compile Include="Solution002.cs"/>
-    <Compile Include="Solution003.cs"/>
-    <Compile Include="Solution004.cs"/>
-    <Compile Include="Solution005.cs"/>
-    <Compile Include="Solution006.cs"/>
-    <Compile Include="Solution007.cs"/>
-    <Compile Include="Solution008.cs"/>
-    <Compile Include="Solution009.cs"/>
-    <Compile Include="Solution010.cs"/>
-    <Compile Include="Solution011.cs"/>
-    <Compile Include="Solution014.cs"/>
-    <Compile Include="Solution015.cs"/>
-    <Compile Include="Solution016.cs"/>
-    <Compile Include="Solution017.cs"/>
-    <Compile Include="Solution018.cs"/>
-    <Compile Include="Solution000.cs"/>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolutionBase.cs" />
+    <Compile Include="Solutions\Solution001.cs" />
+    <Compile Include="Solutions\Solution002.cs" />
+    <Compile Include="Solutions\Solution003.cs" />
+    <Compile Include="Solutions\Solution004.cs" />
+    <Compile Include="Solutions\Solution005.cs" />
+    <Compile Include="Solutions\Solution006.cs" />
+    <Compile Include="Solutions\Solution007.cs" />
+    <Compile Include="Solutions\Solution008.cs" />
+    <Compile Include="Solutions\Solution009.cs" />
+    <Compile Include="Solutions\Solution010.cs" />
+    <Compile Include="Solutions\Solution011.cs" />
+    <Compile Include="Solutions\Solution014.cs" />
+    <Compile Include="Solutions\Solution015.cs" />
+    <Compile Include="Solutions\Solution016.cs" />
+    <Compile Include="Solutions\Solution017.cs" />
+    <Compile Include="Solutions\Solution018.cs" />
+    <Compile Include="Solutions\Solution019.cs" />
+    <Compile Include="Solutions\Solution020.cs" />
+    <Compile Include="Solutions\Solution067.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config"/>
+    <None Include="packages.config" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+  <ItemGroup>
+    <Content Include="data\Problem008.txt" />
+    <Content Include="data\Problem067.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\Problem018.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

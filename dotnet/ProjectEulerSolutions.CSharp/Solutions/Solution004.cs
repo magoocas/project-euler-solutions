@@ -15,11 +15,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution004
+    public class Solution004 : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
             var products = new List<int>();
 
