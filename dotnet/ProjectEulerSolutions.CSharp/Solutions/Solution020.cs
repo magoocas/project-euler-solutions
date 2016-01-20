@@ -24,14 +24,14 @@ namespace ProjectEulerSolutions.CSharp.Solutions
     {
         public override object Answer()
         {
-            long factorial = 1000;
+            long factorial = 100;
 
             //max number we can safely store in our chosen type
             var maxNum = (long) Math.Pow(10, Math.Floor(Math.Log10(long.MaxValue)/Math.Log10(factorial)));
 
             var digits = new List<long>();
             digits.Add(factorial);
-            while (factorial-- > 0)
+            while (--factorial > 0)
             {
                 var digitCount = digits.Count;
                 long carry = 0;

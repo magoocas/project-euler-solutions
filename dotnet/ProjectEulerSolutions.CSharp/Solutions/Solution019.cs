@@ -23,6 +23,7 @@
 
     Url: https://projecteuler.net/problem=19
 */
+using System;
 
 namespace ProjectEulerSolutions.CSharp.Solutions
 {
@@ -30,7 +31,18 @@ namespace ProjectEulerSolutions.CSharp.Solutions
     {
         public override object Answer()
         {
-			return 0;
+            var date = DateTime.Parse("01/01/1901");
+            var lastDay = DateTime.Parse("12/31/2000");
+            var count = 0;
+            while(date < lastDay)
+            {
+                if (date.DayOfWeek == DayOfWeek.Sunday && date.Day == 1)
+                {
+                    count++;
+                }
+                date = date.AddDays(1);
+            }
+            return count;
         }
     }
 }

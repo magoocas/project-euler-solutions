@@ -14,7 +14,7 @@ namespace ProjectEulerSolutions.CSharp
         public SolutionBase()
         {
             SolutionId = Regex.Match(GetType().Name, "[0-9]{3}$").Value;
-            var problemFile = $"data\\Problem{SolutionId}.txt";
+            var problemFile = Path.Combine("data",$"Problem{SolutionId}.txt");
             if (File.Exists(problemFile))
                 ProblemData = File.ReadAllText(problemFile);
         }

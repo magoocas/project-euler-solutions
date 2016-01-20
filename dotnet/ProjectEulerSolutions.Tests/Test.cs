@@ -59,7 +59,7 @@ namespace ProjectEulerSolutions.Tests
             var stopwatch = new Stopwatch();
             var runCount = 0;
 		    var minTime = 100;
-		    var maxTime = Debugger.IsAttached ? 0 : 1000;
+		    var maxTime = Debugger.IsAttached ? 0 : 10000;
 		    var maxRun = 1000;
             string result = "";
 
