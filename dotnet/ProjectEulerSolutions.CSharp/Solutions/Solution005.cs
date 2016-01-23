@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using ProjectEulerSolutions.CSharp.Utility;
 
 namespace ProjectEulerSolutions.CSharp.Solutions
 {
@@ -22,7 +23,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
         public override object Answer()
         {
             var answer = Enumerable.Range(2, 19).Select(p =>
-                Solution003.GetPrimeFactors(p)
+                Prime.GetPrimeFactors(p)
                     .GroupBy(f => f)
                     .Select(g => new
                     {

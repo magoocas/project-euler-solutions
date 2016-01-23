@@ -10,9 +10,8 @@
     Url: https://projecteuler.net/problem=3
 */
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using ProjectEulerSolutions.CSharp.Utility;
 
 namespace ProjectEulerSolutions.CSharp.Solutions
 {
@@ -20,33 +19,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
     {
         public override object Answer()
         {
-            var primes = GetPrimeFactors(600851475143);
-            return (int) primes.Max();
-        }
-
-        public static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
-        {
-            var primes = new List<long>();
-            while (potentialPrime*2 <= numberToFactor)
-            {
-                long remainder;
-                var quotient = Math.DivRem(numberToFactor, potentialPrime, out remainder);
-
-                if (remainder == 0)
-                {
-                    primes.Add(potentialPrime);
-                    numberToFactor = quotient;
-                }
-                else if (potentialPrime == 2)
-                    potentialPrime = 3;
-                else
-                    potentialPrime = potentialPrime + 2;
-            }
-
-            if (numberToFactor > 0)
-                primes.Add(numberToFactor);
-
-            return primes;
+            return Prime.GetPrimeFactors(600851475143).Max();
         }
     }
 }

@@ -14,29 +14,17 @@
     Url: https://projecteuler.net/problem=2
 */
 
+using System.Collections.Generic;
+using System.Linq;
+using ProjectEulerSolutions.CSharp.Utility;
+
 namespace ProjectEulerSolutions.CSharp.Solutions
 {
     public class Solution002 : SolutionBase
     {
         public override object Answer()
         {
-            var a = 1;
-            var b = 2;
-            var sum = 0;
-            var evenTotal = 0;
-
-            while (b < 4000000)
-            {
-                if (b%2 == 0)
-                {
-                    evenTotal += b;
-                }
-                sum = a + b;
-                a = b;
-                b = sum;
-            }
-
-            return evenTotal;
+            return Sequence.Fibbinoci().Where(x => (x & 1) == 0).TakeWhile(x => x < 4000000).Sum();
         }
     }
 }

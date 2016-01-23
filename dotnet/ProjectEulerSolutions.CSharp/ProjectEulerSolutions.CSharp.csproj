@@ -71,6 +71,8 @@
     <Compile Include="Solutions\Solution019.cs" />
     <Compile Include="Solutions\Solution020.cs" />
     <Compile Include="Solutions\Solution067.cs" />
+    <Compile Include="Utility\Prime.cs" />
+    <Compile Include="Utility\Sequence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

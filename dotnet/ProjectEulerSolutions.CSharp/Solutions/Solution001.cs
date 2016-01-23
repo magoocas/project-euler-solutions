@@ -12,6 +12,7 @@
 */
 
 using System.Linq;
+using ProjectEulerSolutions.CSharp.Utility;
 
 namespace ProjectEulerSolutions.CSharp.Solutions
 {
@@ -19,9 +20,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
     {
         public override object Answer()
         {
-            return Enumerable.Range(0, 1000)
-                .Where(x => x % 3 == 0 || x % 5 == 0)
-                .Sum();
+            return Sequence.Unfold(0, x => x + 1).TakeWhile(x=>x<1000).Where(x => x%3 == 0 || x%5 == 0).Sum();
         }
     }
 }
