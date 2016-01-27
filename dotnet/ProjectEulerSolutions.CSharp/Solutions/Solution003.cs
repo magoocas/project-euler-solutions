@@ -24,9 +24,10 @@ namespace ProjectEulerSolutions.CSharp.Solutions
             return (int) primes.Max();
         }
 
-        public static List<long> GetPrimeFactors(long numberToFactor, long potentialPrime = 2)
+        public static IEnumerable<long> GetPrimeFactors(long number)
         {
-            var primes = new List<long>();
+            long numberToFactor = number;
+            long potentialPrime = 2;
             while (potentialPrime*2 <= numberToFactor)
             {
                 long remainder;
@@ -34,7 +35,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
 
                 if (remainder == 0)
                 {
-                    primes.Add(potentialPrime);
+                    yield return potentialPrime;
                     numberToFactor = quotient;
                 }
                 else if (potentialPrime == 2)
@@ -44,9 +45,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
             }
 
             if (numberToFactor > 0)
-                primes.Add(numberToFactor);
-
-            return primes;
+                yield return numberToFactor;
         }
     }
 }

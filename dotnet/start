@@ -22,11 +22,11 @@ write_CSharp_code()
 
 	cat >> $output_file << EOL
 
-namespace ProjectEulerSolutions.CSharp
+namespace ProjectEulerSolutions.CSharp.Solutions
 {
-    public static class Solution${padded_number}
+    public class Solution${padded_number} : SolutionBase
     {
-        public static object Answer()
+        public override object Answer()
         {
 			return 0;
         }
