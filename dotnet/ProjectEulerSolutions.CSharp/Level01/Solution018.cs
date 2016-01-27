@@ -15,7 +15,6 @@
         That is, 3 + 7 + 4 + 9 = 23.
         
         Find the maximum total from top to bottom of the triangle below:
-         Correct Path: RRDDRDDRRRRRDR
             75`
             95 64`
             17 47 82`
@@ -42,10 +41,8 @@
 */
 
 using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution018 : SolutionBase
     {

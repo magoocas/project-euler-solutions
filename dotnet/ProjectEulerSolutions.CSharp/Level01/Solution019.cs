@@ -25,7 +25,7 @@
 */
 using System;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution019 : SolutionBase
     {

@@ -22,7 +22,7 @@
 using System;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution022 : SolutionBase
     {

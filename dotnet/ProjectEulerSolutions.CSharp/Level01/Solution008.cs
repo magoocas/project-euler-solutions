@@ -37,7 +37,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution008 : SolutionBase
     {

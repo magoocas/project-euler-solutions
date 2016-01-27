@@ -15,13 +15,13 @@
 
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution010 : SolutionBase
     {
         public override object Answer()
         {
-            return Solution007.GetPrimes(2000000).Aggregate(0L, (sum, prime) => sum + prime);
+            return ToolBox.GetPrimes(2000000).Aggregate(0L, (sum, prime) => sum + prime);
         }
     }
 }

@@ -50,34 +50,37 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolutionBase.cs" />
-    <Compile Include="Solutions\Solution001.cs" />
-    <Compile Include="Solutions\Solution002.cs" />
-    <Compile Include="Solutions\Solution003.cs" />
-    <Compile Include="Solutions\Solution004.cs" />
-    <Compile Include="Solutions\Solution005.cs" />
-    <Compile Include="Solutions\Solution006.cs" />
-    <Compile Include="Solutions\Solution007.cs" />
-    <Compile Include="Solutions\Solution008.cs" />
-    <Compile Include="Solutions\Solution009.cs" />
-    <Compile Include="Solutions\Solution010.cs" />
-    <Compile Include="Solutions\Solution011.cs" />
-    <Compile Include="Solutions\Solution014.cs" />
-    <Compile Include="Solutions\Solution015.cs" />
-    <Compile Include="Solutions\Solution016.cs" />
-    <Compile Include="Solutions\Solution017.cs" />
-    <Compile Include="Solutions\Solution018.cs" />
-    <Compile Include="Solutions\Solution019.cs" />
-    <Compile Include="Solutions\Solution020.cs" />
-    <Compile Include="Solutions\Solution067.cs" />
-    <Compile Include="Solutions\Solution021.cs" />
-    <Compile Include="Solutions\Solution022.cs" />
-    <Compile Include="Solutions\Solution023.cs" />
-    <Compile Include="Solutions\Solution024.cs" />
-    <Compile Include="Utility\Extensions\ListEx.cs" />
+    <Compile Include="Level01\Solution001.cs" />
+    <Compile Include="Level01\Solution002.cs" />
+    <Compile Include="Level01\Solution003.cs" />
+    <Compile Include="Level01\Solution004.cs" />
+    <Compile Include="Level01\Solution005.cs" />
+    <Compile Include="Level01\Solution006.cs" />
+    <Compile Include="Level01\Solution007.cs" />
+    <Compile Include="Level01\Solution008.cs" />
+    <Compile Include="Level01\Solution009.cs" />
+    <Compile Include="Level01\Solution010.cs" />
+    <Compile Include="Level01\Solution011.cs" />
+    <Compile Include="Level01\Solution014.cs" />
+    <Compile Include="Level01\Solution015.cs" />
+    <Compile Include="Level01\Solution016.cs" />
+    <Compile Include="Level01\Solution017.cs" />
+    <Compile Include="Level01\Solution018.cs" />
+    <Compile Include="Level01\Solution019.cs" />
+    <Compile Include="Level01\Solution020.cs" />
+    <Compile Include="Level01\Solution021.cs" />
+    <Compile Include="Level01\Solution022.cs" />
+    <Compile Include="Level01\Solution023.cs" />
+    <Compile Include="Level01\Solution024.cs" />
+    <Compile Include="Level02\Solution067.cs" />
+    <Compile Include="ToolBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="data\Problem022.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\Problem011.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -101,7 +104,6 @@
   </Target>
   -->
   <ItemGroup>
-    <Folder Include="Utility\" />
-    <Folder Include="Utility\Extensions\" />
+    <Folder Include="Level02\" />
   </ItemGroup>
 </Project>

@@ -14,51 +14,12 @@
         What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5,
         6, 7, 8 and 9?
 
-012
-021
-102
-120
-201
-210
-
-0123
-0132
-0213
-0231
-0312
-0321
-1023
-1032
-1203
-1230
-1302
-1320
-2013
-2031
-2103
-2130
-2301
-2310
-3012
-3021
-3102
-3120
-3201
-3210
-
-
-
     Url: https://projecteuler.net/problem=24
 */
 using System.Collections.Generic;
-using ProjectEulerSolutions.CSharp.Utility.Extensions;
-using System.Linq;
 using System;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using System.Globalization;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution024 : SolutionBase
     {
@@ -70,7 +31,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
                 counter++;
                 return permutationCallback(number);
             }
-            
+
             for (int i = 0; i < digits.Count; i++)
             {
                 var digit = digits[i];
@@ -78,6 +39,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
                 if (Permute(digits, ref counter, permutationCallback, number + digit))
                     return true;
                 digits.Insert(i, digit);
+
             }
             return false;
         }

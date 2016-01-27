@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution020 : SolutionBase
     {

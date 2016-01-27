@@ -15,14 +15,14 @@
 using System;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution005 : SolutionBase
     {
         public override object Answer()
         {
             var answer = Enumerable.Range(2, 19).Select(p =>
-                Solution003.GetPrimeFactors(p)
+                ToolBox.GetPrimeFactors(p)
                     .GroupBy(f => f)
                     .Select(g => new
                     {

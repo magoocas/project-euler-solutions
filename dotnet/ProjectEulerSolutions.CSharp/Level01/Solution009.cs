@@ -19,7 +19,7 @@
     Url: https://projecteuler.net/problem=9
 */
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution009 : SolutionBase
     {

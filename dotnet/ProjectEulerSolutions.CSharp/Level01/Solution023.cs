@@ -26,11 +26,9 @@
     Url: https://projecteuler.net/problem=23
 */
 using System.Linq;
-using System;
-using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution023 : SolutionBase
     {

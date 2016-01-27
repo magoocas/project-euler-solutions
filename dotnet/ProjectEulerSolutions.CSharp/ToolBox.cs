@@ -1,31 +1,35 @@
-/*
-    Problem: 7
-
-    Title: 10001st prime
-
-    Description:
-        
-        
-        By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can
-        see that the 6th prime is 13.
-        
-        What is the 10 001st prime number?
-
-    Url: https://projecteuler.net/problem=7
-*/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp
 {
-    public class Solution007 : SolutionBase
+    public static class ToolBox
     {
-        public override object Answer()
+        public static IEnumerable<long> GetPrimeFactors(long number)
         {
-            return GetNthPrime(10001, 200000);
+            long numberToFactor = number;
+            long potentialPrime = 2;
+            while (potentialPrime*2 <= numberToFactor)
+            {
+                long remainder;
+                var quotient = Math.DivRem(numberToFactor, potentialPrime, out remainder);
+
+                if (remainder == 0)
+                {
+                    yield return potentialPrime;
+                    numberToFactor = quotient;
+                }
+                else if (potentialPrime == 2)
+                    potentialPrime = 3;
+                else
+                    potentialPrime = potentialPrime + 2;
+            }
+
+            if (numberToFactor > 0)
+                yield return numberToFactor;
         }
+
 
         public static IEnumerable<long> GetPrimes(long searchLimit)
         {
@@ -81,3 +85,4 @@ namespace ProjectEulerSolutions.CSharp.Solutions
         }
     }
 }
+

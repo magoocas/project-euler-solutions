@@ -22,7 +22,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp.Level01
 {
     public class Solution021 : SolutionBase
     {
@@ -38,7 +38,7 @@ namespace ProjectEulerSolutions.CSharp.Solutions
             var countList = new List<long>();
             var indexList = new List<int>();
 
-            foreach (var f in Solution003.GetPrimeFactors(number).GroupBy(x=>x))
+            foreach (var f in ToolBox.GetPrimeFactors(number).GroupBy(x=>x))
             {
                 primeList.Add(f.Key);
                 countList.Add(f.Count());
