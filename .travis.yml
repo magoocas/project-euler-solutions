@@ -1,7 +1,7 @@
 language: csharp
 install:
-  - nuget restore dotnet/csharp.sln
+  - nuget restore csharp/csharp.sln
   - nuget install NUnit.Runners -Version 3.0.1 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release dotnet/csharp.sln
-  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./dotnet/csharp/bin/Release/csharp.dll
+  - xbuild /p:Configuration=Release csharp/csharp.sln
+  - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./csharp/csharp/bin/Release/csharp.dll
