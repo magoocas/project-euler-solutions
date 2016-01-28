@@ -74,6 +74,9 @@
     <Compile Include="Level01\Solution024.cs" />
     <Compile Include="Level02\Solution067.cs" />
     <Compile Include="ToolBox.cs" />
+    <Compile Include="Level01\Solution012.cs" />
+    <Compile Include="Level01\Solution013.cs" />
+    <Compile Include="Level01\Solution025.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -81,6 +84,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="data\Problem011.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="data\Problem013.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

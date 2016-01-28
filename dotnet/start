@@ -22,7 +22,7 @@ write_CSharp_code()
 
 	cat >> $output_file << EOL
 
-namespace ProjectEulerSolutions.CSharp.Solutions
+namespace ProjectEulerSolutions.CSharp
 {
     public class Solution${padded_number} : SolutionBase
     {

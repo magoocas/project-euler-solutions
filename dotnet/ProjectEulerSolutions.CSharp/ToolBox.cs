@@ -83,6 +83,54 @@ namespace ProjectEulerSolutions.CSharp
 
             return primes.Count() == n ? primes.Last() : -1;
         }
+
+
+        public static IEnumerable<long> GetDivisors(long number, bool proper = false)
+        {
+            var primeList = new List<long>();
+            var countList = new List<long>();
+            var indexList = new List<int>();
+
+            foreach (var f in ToolBox.GetPrimeFactors(number).GroupBy(x=>x))
+            {
+                primeList.Add(f.Key);
+                countList.Add(f.Count());
+                indexList.Add(0);
+            }
+            if(primeList.Count == 0)
+            {
+                yield return 1;
+                if(number > 1 && !proper)
+                    yield return number;
+                yield break;
+            }
+            int i = 0;
+            while (i < primeList.Count)
+            {
+                long divisor = 1;
+                for (i = 0; i < primeList.Count; i++)
+                {
+                    for (int j = 0; j < indexList[i]; j++)
+                    {
+                        divisor *= primeList[i];
+                    }
+                }
+
+
+                for (i = 0; i < primeList.Count; i++)
+                {
+                    indexList[i]++;
+                    if (indexList[i] > countList[i])
+                        indexList[i] = 0;
+                    else
+                        break;
+                }
+                if (proper && i >= primeList.Count)
+                    yield break;
+                yield return divisor;
+            }
+
+        }
     }
 }
 

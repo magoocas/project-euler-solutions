@@ -4,7 +4,7 @@
     Title: 
 
     Description:
-        Using names.txt (right click and 'Save Link/Target As...'), a 46K text file
+        Using names.txt {Problem022.txt} (right click and 'Save Link/Target As...'), a 46K text file
         containing over five-thousand first names, begin by sorting it into
         alphabetical order. Then working out the alphabetical value for each name,
         multiply this value by its alphabetical position in the list to obtain a name
@@ -15,7 +15,7 @@
         obtain a score of 938 x 53 = 49714.
         
         What is the total of all the name scores in the file?
-        
+
 
     Url: https://projecteuler.net/problem=22
 */

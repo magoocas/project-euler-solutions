@@ -24,8 +24,14 @@ namespace ProjectEulerSolutions.CSharp
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t => t.BaseType == typeof (SolutionBase));
         }
+        public T[] GetProblemDataAsArray<T>(string rowSeparators, Func<string, T> valueConverter)
+        {
+            return ProblemData
+                .Split(rowSeparators.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Select(valueConverter).ToArray();
+        }
 
-        public T[][] GetProblemDataAsArray<T>(string rowSeparators, string columnSeparators, Func<string, T> valueConverter )
+        public T[][] GetProblemDataAsMatrix<T>(string rowSeparators, string columnSeparators, Func<string, T> valueConverter )
         {
             return ProblemData
                 .Split(rowSeparators.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)

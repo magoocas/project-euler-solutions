@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEulerSolutions.CSharp", "ProjectEulerSolutions.CSharp\ProjectEulerSolutions.CSharp.csproj", "{928CE6B3-6596-40CF-9D4A-2C7205134838}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ProjectEulerSolutions.FSharp", "ProjectEulerSolutions.FSharp\ProjectEulerSolutions.FSharp.fsproj", "{ECBC4FFA-945A-4D7B-B352-5AE26BE814C2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEulerSolutions.Tests", "ProjectEulerSolutions.Tests\ProjectEulerSolutions.Tests.csproj", "{3C6B0FD3-78BB-41E1-B03E-2F1F8A2DCE58}"
 EndProject
 Global
@@ -23,10 +21,6 @@ Global
 		{928CE6B3-6596-40CF-9D4A-2C7205134838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{928CE6B3-6596-40CF-9D4A-2C7205134838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{928CE6B3-6596-40CF-9D4A-2C7205134838}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECBC4FFA-945A-4D7B-B352-5AE26BE814C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECBC4FFA-945A-4D7B-B352-5AE26BE814C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECBC4FFA-945A-4D7B-B352-5AE26BE814C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECBC4FFA-945A-4D7B-B352-5AE26BE814C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using CsvHelper;
 using NUnit.Framework;
 using ProjectEulerSolutions.CSharp;
@@ -32,22 +31,6 @@ namespace ProjectEulerSolutions.Tests
 		            .SetName($"{type.Namespace}_{type.Name}")
 		            .Returns(answers[type.Name]);
 		    }
-
-		    var fsharpSolutions = Assembly.LoadFrom("ProjectEulerSolutions.FSharp.dll")
-		        .GetTypes()
-		        .Where(type => type.Name.StartsWith("Solution"));
-		    foreach (var type in fsharpSolutions)
-            {
-                Func<object> solution = () => type.GetProperty("Answer").GetValue(null);
-
-                if (!answers.ContainsKey(type.Name))
-                    answers.Add(type.Name, "No Answer In TestCases File!");
-
-                yield return new TestCaseData(solution, type, answers[type.Name])
-                    .SetName($"{type.Namespace}_{type.Name}")
-                    .Returns(answers[type.Name]);
-
-            }
 		}
 
 

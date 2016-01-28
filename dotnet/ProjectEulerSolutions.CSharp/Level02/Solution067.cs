@@ -14,7 +14,7 @@
         
         That is, 3 + 7 + 4 + 9 = 23.
         
-        Find the maximum total from top to bottom in triangle.txt (right click and
+        Find the maximum total from top to bottom in triangle.txt {Problem067.txt} (right click and
         'Save Link/Target As...'), a 15K text file containing a triangle with
         one-hundred rows.
         
@@ -34,7 +34,7 @@ namespace ProjectEulerSolutions.CSharp.Level02
     {
         public override object Answer()
         {
-            var triangle = GetProblemDataAsArray("\r\n", " ", int.Parse);
+            var triangle = GetProblemDataAsMatrix("\r\n", " ", int.Parse);
 
             for (int i = triangle.Length - 2; i >= 0; i--)
             {

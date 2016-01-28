@@ -35,7 +35,7 @@ namespace ProjectEulerSolutions.CSharp.Level01
         public override object Answer()
         {
             var abundantNumbers = Enumerable.Range(1,28123)
-                .Where(x => Solution021.GetDivisors(x, true).Sum() > x).ToList();
+                .Where(x => ToolBox.GetDivisors(x, true).Sum() > x).ToList();
 
             var abundantSums = new List<int>();
 
