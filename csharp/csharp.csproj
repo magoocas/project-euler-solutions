@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0" DefaultTargets="Build">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C2F0EA9-5B9C-4E33-A072-08083A0868BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>csharp</RootNamespace>
+    <AssemblyName>csharp</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Level01\Solution001.cs" />
+    <Compile Include="Level01\Solution002.cs" />
+    <Compile Include="Level01\Solution003.cs" />
+    <Compile Include="Level01\Solution004.cs" />
+    <Compile Include="Level01\Solution005.cs" />
+    <Compile Include="Level01\Solution006.cs" />
+    <Compile Include="Level01\Solution007.cs" />
+    <Compile Include="Level01\Solution008.cs" />
+    <Compile Include="Level01\Solution009.cs" />
+    <Compile Include="Level01\Solution010.cs" />
+    <Compile Include="Level01\Solution011.cs" />
+    <Compile Include="Level01\Solution014.cs" />
+    <Compile Include="Level01\Solution015.cs" />
+    <Compile Include="Level01\Solution016.cs" />
+    <Compile Include="Level01\Solution017.cs" />
+    <Compile Include="Level01\Solution018.cs" />
+    <Compile Include="Level01\Solution019.cs" />
+    <Compile Include="Level01\Solution020.cs" />
+    <Compile Include="Level01\Solution021.cs" />
+    <Compile Include="Level01\Solution022.cs" />
+    <Compile Include="Level01\Solution023.cs" />
+    <Compile Include="Level01\Solution024.cs" />
+    <Compile Include="Level02\Solution067.cs" />
+    <Compile Include="SolutionBase.cs" />
+    <Compile Include="SolutionTestCase.cs" />
+    <Compile Include="SolutionTests.cs" />
+    <Compile Include="ToolBox.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  -->
+  <Target Name="BeforeBuild">
+    <ItemGroup>
+      <ProblemDataFiles Include="$(ProjectDir)\ProblemData\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ProblemDataFiles)" DestinationFolder="$(TargetDir)\ProblemData\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+</Project>
