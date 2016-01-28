@@ -38,23 +38,20 @@ namespace csharp.Level01
             var abundantNumbers = Enumerable.Range(1, 28123)
                 .Where(x => Solution021.GetDivisors(x, true).Sum() > x).ToList();
 
-            var abundantSums = new List<int>();
+            var abundantSums = new HashSet<int>();
 
             for (var i = 0; i < abundantNumbers.Count; i++)
                 for (var j = i; j < abundantNumbers.Count; j++)
                     abundantSums.Add(abundantNumbers[i] + abundantNumbers[j]);
 
-            abundantSums = abundantSums.Distinct().ToList();
-            abundantSums.Sort();
-
             var sum = 0;
 
-            for (var i = 1; i <= 28123; i++)
+            for (int i = 1; i <= 28123; i++)
             {
                 if (!abundantSums.Contains(i))
                     sum += i;
             }
-
+            
             return sum;
         }
     }
