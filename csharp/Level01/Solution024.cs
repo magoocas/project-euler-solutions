@@ -17,50 +17,33 @@
     Url: https://projecteuler.net/problem=24
 */
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace csharp.Level01
 {
     public class Solution024 : SolutionBase
     {
-        public bool Permute(List<int> digits, ref int counter, Func<string, bool> permutationCallback,
-            string number = "")
-        {
-            if (digits.Count == 0)
-            {
-                counter++;
-                return permutationCallback(number);
-            }
-
-            for (var i = 0; i < digits.Count; i++)
-            {
-                var digit = digits[i];
-                digits.RemoveAt(i);
-                if (Permute(digits, ref counter, permutationCallback, number + digit))
-                    return true;
-                digits.Insert(i, digit);
-            }
-            return false;
-        }
-
         public override object Answer()
         {
-            var digits = new List<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-            var counter = 0;
-            var number = "";
 
-            Permute(digits, ref counter, num =>
+            var digits = new int[10];
+            var availableDigits = new List<int> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+            var permutation = 999999; //zero based "1 millionth"
+
+            var possibilities = ToolBox.Factorial(availableDigits.Count - 1);
+            for (int j = digits.Length-1; j > 0; j--)
             {
-                if (counter == 1000000)
-                {
-                    number = num;
-                    return true;
-                }
-                return false;
-            });
+                var digitIndex = permutation/possibilities;
+                permutation %= possibilities;
+                digits[j] = availableDigits[digitIndex];
+                availableDigits.RemoveAt(digitIndex);
+                possibilities /= j;
+            }
 
-            return number;
+            digits[0] = availableDigits[0];
+
+            return digits.Aggregate("",(a,b)=> b+a);
         }
     }
 }

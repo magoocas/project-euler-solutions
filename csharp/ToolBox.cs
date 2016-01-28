@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace csharp
 {
@@ -82,6 +83,14 @@ namespace csharp
             var primes = GetPrimes(searchLimit, p => p <= n).ToList();
 
             return primes.Count() == n ? primes.Last() : -1;
+        }
+
+        public static int Factorial(int number)
+        {
+            int result = 1;
+            while (number > 1)
+                result *= number--;
+            return result;
         }
     }
 }

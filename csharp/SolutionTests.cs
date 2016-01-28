@@ -32,7 +32,13 @@ namespace csharp
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="solution"></param>
+        /// <param name="solutionType"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
         [Test, TestCaseSource(nameof(TestCases))]
         public string TestSoution(Func<object> solution, Type solutionType, string answer)
         {
@@ -43,7 +49,7 @@ namespace csharp
             result = solution().ToString();
             stopwatch.Stop();
 
-            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {stopwatch.ElapsedTicks/10} us.");
+            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {(double)stopwatch.ElapsedTicks/10000:F4} ms.");
 
             if(answer=="")
                 Assert.Inconclusive();
