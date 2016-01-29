@@ -17,7 +17,7 @@ namespace csharp
                 .GetRecords<SolutionTestCase>()
                 .ToDictionary(s => s.SolutionName, s => s.Answer);
 
-            foreach (var type in SolutionBase.GetDerivedTypes())
+            foreach (var type in SolutionBase.GetDerivedTypes().OrderByDescending(t=>t.Name))
             {
                 var solution = (SolutionBase) Activator.CreateInstance(type);
 

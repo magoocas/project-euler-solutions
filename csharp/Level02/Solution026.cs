@@ -26,14 +26,48 @@
 
     Url: https://projecteuler.net/problem=26
 */
+using System.Collections.Generic;
 
 namespace csharp.Level02
 {
     public class Solution026 : SolutionBase
     {
+        
         public override object Answer()
         {
-			return 0;
+            var maxRecurranceCount = 0;
+            var maxDenominator = 0;
+
+            for (int denominator = 2; denominator < 1000; denominator++)
+            {
+                var numerator = 1;
+                var operationList = new List<string>();
+                while (true)
+                {
+                    var quotient = numerator / denominator;
+                    var remainder = numerator % denominator;
+                    string operation = $"{quotient}/{remainder}";
+
+                    if (operationList.Contains(operation))
+                    {
+                        var recurranceCount = operationList.Count - operationList.IndexOf(operation);
+                        if (recurranceCount > maxRecurranceCount)
+                        {
+                            maxRecurranceCount = recurranceCount;
+                            maxDenominator = denominator;
+                        }
+                        break;
+                    }
+                    operationList.Add(operation);
+
+                    if (remainder == 0)
+                        break;
+                    
+                    numerator = remainder * 10;
+                }
+
+            }
+            return maxDenominator;
         }
     }
 }
