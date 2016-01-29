@@ -44,7 +44,6 @@ namespace csharp
         }
 
         public T[][] GetProblemDataAsMatrix<T>(string rowSeparators, string columnSeparators, Func<string, T> valueConverter )
-            Func<string, T> valueConverter)
         {
             return ProblemData
                 .Split(rowSeparators.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)

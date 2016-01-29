@@ -26,7 +26,6 @@
 
     Url: https://projecteuler.net/problem=26
 */
-using Numerics;
 
 namespace csharp.Level02
 {
@@ -34,10 +33,6 @@ namespace csharp.Level02
     {
         public override object Answer()
         {
-            for (int i = 1; i < 1000; i++)
-            {
-                var fraction = (BigRational)1 / (BigRational)i;
-            }
 			return 0;
         }
     }
