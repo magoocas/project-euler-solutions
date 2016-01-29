@@ -94,7 +94,7 @@ page_url=`echo https://projecteuler.net/problem=$number`
 page_html=`wget -q -O- $page_url | hxselect -i "div.problem_content"`
 fixed_html=`echo $page_html | xmlstarlet ed -a '//*[@style]/br' -t text -n test -v '&nbsp;' | sed -e 's/<\(.*\) style[^>]*>/<\1>\&nbsp;/g' -e 's/\&amp;nbsp;/\&nbsp;/g'`
 description=`echo $fixed_html | w3m -dump -T text/html | sed -r 's/^\s+/    /g' | sed -e 's/^/        /g'`
-title=`echo $page_html | hxselect -i "div#content > h2" | xml2asc | lynx -stdin -dump`
+title=`echo $page_html | hxselect -i "div#content > h2" | xml2asc | w3m -dump -T text/html`
 
 eval write_code
 
