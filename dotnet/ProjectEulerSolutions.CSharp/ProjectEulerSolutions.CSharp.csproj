@@ -46,6 +46,9 @@
     <Reference Include="nunit.framework, Version=3.0.5813.39031, Culture=neutral, PublicKeyToken=2638cd05610744eb">
       <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="BigRationalLibrary">
+      <HintPath>..\packages\BigRationalLibrary.1.0.0.0\lib\NETFramework40\BigRationalLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="Level01\Solution012.cs" />
     <Compile Include="Level01\Solution013.cs" />
     <Compile Include="Level01\Solution025.cs" />
+    <Compile Include="Level02\Solution026.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
