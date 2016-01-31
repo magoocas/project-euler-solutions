@@ -25,4 +25,7 @@ Solution023,4179871
 Solution024,2783915460
 Solution025,4782
 Solution026,983
+Solution027,-59231
+Solution028,669171001
+Solution029,9183
 Solution067,7273
