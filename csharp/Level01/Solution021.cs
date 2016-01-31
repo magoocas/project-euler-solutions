@@ -26,17 +26,17 @@ namespace csharp.Level01
 {
     public class Solution021 : SolutionBase
     {
-        private int d(int n)
+        private ulong d(ulong n)
         {
             var divisors = ToolBox.GetDivisors(n, true);
-            return (int) divisors.Sum();
+            return divisors.Aggregate((a, b) => a + b);
         }
 
         public override object Answer()
         {
-            var sum = 0;
+            ulong sum = 0;
 
-            for (var a = 1; a <= 10000; a++)
+            for (ulong a = 1; a <= 10000; a++)
             {
                 var b = d(a);
                 if (b != a && a == d(b))
