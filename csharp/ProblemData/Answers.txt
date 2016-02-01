@@ -30,4 +30,5 @@ Solution028,669171001
 Solution029,9183
 Solution030,443839
 Solution031,73682
+Solution032,45228
 Solution067,7273
