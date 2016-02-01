@@ -15,7 +15,10 @@
     Url: https://projecteuler.net/problem=34
 */
 
+using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using csharp.Utility;
 
 namespace csharp.Level02
@@ -27,12 +30,25 @@ namespace csharp.Level02
         {
             int sum = 0;
             var max = ToolBox.Factorial(9)*9;
-            for (int i = 10; i <= max; i++)
+
+            var chunks = Environment.ProcessorCount;
+            var chunkSize = max/chunks + 1;
+            var results = new int[chunks];
+
+            Parallel.For(0, chunks, ()=>0, (i,loop,chunkSum) =>
             {
-                if (i == ToolBox.NumberToDigits(i).Select(ToolBox.Factorial).Sum())
-                    sum += i;
-            }
-			return sum;
+                var chunkStart = i*chunkSize;
+                var chunkMax = i*chunkSize + chunkSize;
+                for (int j = chunkStart; j < chunkMax; j++)
+                {
+                    if (j == ToolBox.NumberToDigits(j).Select(ToolBox.Factorial).Sum())
+                        chunkSum += j;
+                }
+                return chunkSum;
+            }, chunkSum => Interlocked.Add(ref sum, chunkSum));
+
+
+			return sum-3;
         }
     }
 }
