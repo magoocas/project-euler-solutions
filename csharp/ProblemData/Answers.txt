@@ -32,4 +32,5 @@ Solution030,443839
 Solution031,73682
 Solution032,45228
 Solution033,100
+Solution034,40730
 Solution067,7273

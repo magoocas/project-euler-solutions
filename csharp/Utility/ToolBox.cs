@@ -6,6 +6,17 @@ namespace csharp.Utility
 {
     public static class ToolBox
     {
+
+
+        public static IEnumerable<int> NumberToDigits(int number)
+        {
+            while (number>0)
+            {
+                yield return number%10;
+                number /= 10;
+            }
+        }
+
         public static IEnumerable<ulong> GetPrimeFactors(ulong number)
         {
             var numberToFactor = number;
@@ -133,7 +144,6 @@ namespace csharp.Utility
             }
 
         }
-
         public static int Factorial(int number)
         {
             int result = 1;

@@ -48,8 +48,8 @@ namespace csharp
             stopwatch.Start();
             result = solution().ToString();
             stopwatch.Stop();
-
-            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {(double)stopwatch.ElapsedTicks/10000:F4} ms.");
+            
+            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {(stopwatch.ElapsedMilliseconds < 5 ? (double)stopwatch.ElapsedMilliseconds/10000: stopwatch.ElapsedMilliseconds):F4} ms.");
 
             if(answer=="")
                 Assert.Inconclusive();
