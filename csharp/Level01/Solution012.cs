@@ -29,6 +29,7 @@
     Url: https://projecteuler.net/problem=12
 */
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
