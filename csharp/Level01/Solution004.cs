@@ -14,6 +14,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
@@ -24,11 +25,18 @@ namespace csharp.Level01
             var products = new List<int>();
 
             for (var i = 100; i <= 999; i++)
-                for (var j = 100; j <= 999; j++)
+                for (var j = i; j <= 999; j++)
                     products.Add(i*j);
 
-            return products.OrderByDescending(a => a).First(x =>
+            return products.Distinct().OrderByDescending(a => a).First(x =>
             {
+                var num = x;
+                var y = num % 10;
+                while ((num/=10)>0)
+                {
+                    y = y*10+num%10;
+                }
+                return x == y;
                 var testString = x.ToString();
                 return testString == string.Concat(testString.Reverse());
             });

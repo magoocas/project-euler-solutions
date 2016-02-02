@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace csharp
     {
         private static IEnumerable TestCases()
         {
-            var answers = new CsvReader(new StreamReader(Path.Combine("ProblemData","Answers.txt")))
+            var answers = new CsvReader(new StreamReader(Path.Combine("ProblemData", "Answers.txt")))
                 .GetRecords<SolutionTestCase>()
                 .ToDictionary(s => s.SolutionName, s => s.Answer);
 
@@ -49,12 +50,13 @@ namespace csharp
             result = solution().ToString();
             stopwatch.Stop();
             
-            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {(stopwatch.ElapsedMilliseconds < 5 ? (double)stopwatch.ElapsedMilliseconds/10000: stopwatch.ElapsedMilliseconds):F4} ms.");
+            Console.WriteLine($"Result: {result}, Answer: {answer}, Execution time: {(stopwatch.ElapsedMilliseconds < 5 ? (double)stopwatch.ElapsedTicks/10000: stopwatch.ElapsedMilliseconds):F4} ms.");
 
             if(answer=="")
                 Assert.Inconclusive();
 
             return result;
         }
+
     }
 }
