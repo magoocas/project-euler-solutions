@@ -37,8 +37,6 @@ namespace csharp.Level01
                     y = y*10+num%10;
                 }
                 return x == y;
-                var testString = x.ToString();
-                return testString == string.Concat(testString.Reverse());
             });
         }
     }
