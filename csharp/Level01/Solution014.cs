@@ -25,27 +25,55 @@
     Url: https://projecteuler.net/problem=14
 */
 
+using System;
+using System.Threading.Tasks;
+
 namespace csharp.Level01
 {
     public class Solution014 : SolutionBase
     {
         public override object Answer()
         {
-            var maxDistance = 0;
+            long maxDistance = 0;
             long maxNumber = 1;
 
-            for (var i = 2; i < 1000000; i++)
+            var max = 1000000;
+            var chunks = Environment.ProcessorCount;
+            var chunkSize = max / chunks + 1;
+
+            var _lock = new object();
+
+            Parallel.For(0, chunks, i =>
             {
-                long next = i;
-                var distance = 0;
-                while ((next = (next & 1) == 0 ? next >> 1 : next*3 + 1) != 1)
-                    distance++;
-                if (distance > maxDistance)
+                var chunkStart = i * chunkSize;
+                var chunkMax = i * chunkSize + chunkSize;
+                var chunkMaxDistance = 0;
+                var chunkMaxNumber = 1;
+
+                for (var j = chunkStart; j < chunkMax; j++)
                 {
-                    maxDistance = distance;
-                    maxNumber = i;
+                    long next = j;
+                    var distance = 0;
+                    while ((next = (next & 1) == 0 ? next >> 1 : next * 3 + 1) > 1)
+                        distance++;
+
+                    if (distance > chunkMaxDistance)
+                    {
+                        chunkMaxDistance = distance;
+                        chunkMaxNumber = j;
+                    }
                 }
-            }
+                lock (_lock)
+                {
+                    if (chunkMaxDistance > maxDistance)
+                    {
+                        maxDistance = chunkMaxDistance;
+                        maxNumber = chunkMaxNumber;
+                    }
+                }
+
+            });
+
             return maxNumber;
         }
     }
