@@ -14,13 +14,16 @@
     Url: https://projecteuler.net/problem=7
 */
 
+using System.Linq;
+using csharp.Utility;
+
 namespace csharp.Level01
 {
     public class Solution007 : SolutionBase
     {
         public override object Answer()
         {
-            return ToolBox.GetNthPrime(10001, 200000);
+            return ToolBox.GetPrimes(200000).Take(10001).Last();
         }
     }
 }

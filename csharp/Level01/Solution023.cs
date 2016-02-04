@@ -28,6 +28,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
@@ -35,18 +36,18 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            var abundantNumbers = Enumerable.Range(1, 28123)
-                .Where(x => ToolBox.GetDivisors(x, true).Sum() > x).ToList();
+            var abundantNumbers = Enumerable.Range(1, 28123).Select(x=>(ulong)x)
+                .Where(x => ToolBox.GetDivisors(x, true).Aggregate((a,b)=>a+b) > x).ToList();
 
-            var abundantSums = new HashSet<int>();
+            var abundantSums = new HashSet<ulong>();
 
             for (var i = 0; i < abundantNumbers.Count; i++)
                 for (var j = i; j < abundantNumbers.Count; j++)
                     abundantSums.Add(abundantNumbers[i] + abundantNumbers[j]);
 
-            var sum = 0;
+            ulong sum = 0;
 
-            for (int i = 1; i <= 28123; i++)
+            for (ulong i = 1; i <= 28123; i++)
             {
                 if (!abundantSums.Contains(i))
                     sum += i;

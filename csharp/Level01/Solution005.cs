@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
@@ -22,7 +23,7 @@ namespace csharp.Level01
         public override object Answer()
         {
             var answer = Enumerable.Range(2, 19).Select(p =>
-                ToolBox.GetPrimeFactors(p)
+                ToolBox.GetPrimeFactors((ulong) p)
                     .GroupBy(f => f)
                     .Select(g => new
                     {
@@ -31,12 +32,14 @@ namespace csharp.Level01
                     }))
                 .SelectMany(x => x)
                 .GroupBy(x => x.prime)
-                .Select(a => new
+                .Select(a =>
                 {
-                    prime = a.Key,
-                    count = a.Max(b => b.count)
-                })
-                .Aggregate(1, (a, b) => a*(int) Math.Pow(b.prime, b.count));
+                    var prime = a.Key;
+                    var result = 1ul;
+                    for (int i = 0; i < a.Max(b => b.count); i++)
+                        result *= prime;
+                    return result;
+                }).Aggregate(1ul, (a, b) => a*b);
 
 
             return answer;

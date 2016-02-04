@@ -14,6 +14,7 @@
 */
 
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
@@ -21,7 +22,7 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            return ToolBox.GetPrimes(2000000).Aggregate(0L, (sum, prime) => sum + prime);
+            return ToolBox.GetPrimes(2000000).Aggregate((sum, prime) => sum + prime);
         }
     }
 }

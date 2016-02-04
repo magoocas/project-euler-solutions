@@ -1,20 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
-namespace csharp
+namespace csharp.Utility
 {
     public static class ToolBox
     {
-        public static IEnumerable<long> GetPrimeFactors(long number)
+
+
+        public static IEnumerable<int> NumberToDigits(int number)
+        {
+            while (number>0)
+            {
+                yield return number%10;
+                number /= 10;
+            }
+        }
+
+        public static IEnumerable<ulong> GetPrimeFactors(ulong number)
         {
             var numberToFactor = number;
-            long potentialPrime = 2;
+            ulong potentialPrime = 2;
             while (potentialPrime*2 <= numberToFactor)
             {
-                long remainder;
-                var quotient = Math.DivRem(numberToFactor, potentialPrime, out remainder);
+                var quotient = numberToFactor/potentialPrime;
+                var remainder = numberToFactor%potentialPrime;
 
                 if (remainder == 0)
                 {
@@ -30,65 +40,67 @@ namespace csharp
             if (numberToFactor > 0)
                 yield return numberToFactor;
         }
-
-
-        public static IEnumerable<long> GetPrimes(long searchLimit)
+        public static bool[] GetPrimeSieve(ulong searchLimit, Action<ulong> primeEmitter =null)
         {
-            return GetPrimes(searchLimit, p => true);
-        }
-
-        /// <summary>
-        ///     Enumerates the primes, so long as predicate returns true
-        /// </summary>
-        /// <returns>The primes.</returns>
-        /// <param name="searchLimit">Search limit.</param>
-        /// <param name="predicate">function that takes the current prime number n, and returns true or false</param>
-        public static IEnumerable<long> GetPrimes(long searchLimit, Func<long, bool> predicate)
-        {
-            var prime = 2L;
-            var primeCount = 1L;
+            ulong prime = 2;
 
             var sieve = new bool[searchLimit + 1L];
+            sieve[0] = sieve[1] = true;
 
-            while (predicate(primeCount))
+            while (true)
             {
-                yield return prime;
+                primeEmitter?.Invoke(prime);
 
-                for (var multiple = prime*2L; multiple < sieve.LongLength; multiple += prime)
+                for (var multiple = prime + prime; multiple < (ulong)sieve.LongLength; multiple += prime)
                     sieve[multiple] = true;
 
-                long possiblePrime;
-                for (possiblePrime = prime + 1; possiblePrime < sieve.LongLength; possiblePrime++)
+                ulong possiblePrime;
+                for (possiblePrime = prime + 1; possiblePrime < (ulong)sieve.LongLength; possiblePrime++)
                 {
                     if (!sieve[possiblePrime])
                     {
                         prime = possiblePrime;
-                        primeCount++;
                         break;
                     }
                 }
-                if (possiblePrime == sieve.LongLength)
+                if (possiblePrime == (ulong)sieve.LongLength)
+                    break;
+            }
+            return sieve;
+        }
+
+        public static IEnumerable<ulong> GetPrimes(ulong searchLimit)
+        {
+            ulong prime = 2;
+
+            var sieve = new bool[searchLimit + 1L];
+            sieve[0] = sieve[1] = true;
+
+            while (true)
+            {
+                yield return prime;
+
+                for (var multiple = prime+prime; multiple < (ulong)sieve.LongLength; multiple += prime)
+                    sieve[multiple] = true;
+
+                ulong possiblePrime;
+                for (possiblePrime = prime + 1; possiblePrime < (ulong) sieve.LongLength; possiblePrime++)
+                {
+                    if (!sieve[possiblePrime])
+                    {
+                        prime = possiblePrime;
+                        break;
+                    }
+                }
+                if (possiblePrime == (ulong) sieve.LongLength)
                     break;
             }
         }
 
-        /// <summary>
-        ///     Gets the nth prime.
-        /// </summary>
-        /// <returns>The nth prime, if prime less than searchLimit. Otherwise returns -1.</returns>
-        /// <param name="n">Nth Prime</param>
-        /// <param name="searchLimit">Limit at which to stop searching for prime.</param>
-        public static long GetNthPrime(long n, long searchLimit)
+
+        public static IEnumerable<ulong> GetDivisors(ulong number, bool proper = false)
         {
-            var primes = GetPrimes(searchLimit, p => p <= n).ToList();
-
-            return primes.Count() == n ? primes.Last() : -1;
-        }
-
-
-        public static IEnumerable<long> GetDivisors(long number, bool proper = false)
-        {
-            var primeList = new List<long>();
+            var primeList = new List<ulong>();
             var countList = new List<long>();
             var indexList = new List<int>();
 
@@ -108,7 +120,7 @@ namespace csharp
             int i = 0;
             while (i < primeList.Count)
             {
-                long divisor = 1;
+                ulong divisor = 1;
                 for (i = 0; i < primeList.Count; i++)
                 {
                     for (int j = 0; j < indexList[i]; j++)
@@ -132,7 +144,6 @@ namespace csharp
             }
 
         }
-
         public static int Factorial(int number)
         {
             int result = 1;

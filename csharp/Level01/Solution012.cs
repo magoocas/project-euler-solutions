@@ -29,6 +29,7 @@
     Url: https://projecteuler.net/problem=12
 */
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level01
 {
@@ -36,7 +37,8 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            int number=0, divisors=0, i=0;
+            ulong number = 0, i = 0;
+            int divisors = 0;
 
             while (divisors <= 500)
             {

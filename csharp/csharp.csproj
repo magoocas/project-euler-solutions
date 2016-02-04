@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utility\Rational.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Level01\Solution001.cs" />
     <Compile Include="Level01\Solution002.cs" />
@@ -74,12 +75,19 @@
     <Compile Include="SolutionBase.cs" />
     <Compile Include="SolutionTestCase.cs" />
     <Compile Include="SolutionTests.cs" />
-    <Compile Include="ToolBox.cs" />
+    <Compile Include="Utility\ToolBox.cs" />
     <Compile Include="Level01\Solution012.cs" />
     <Compile Include="Level01\Solution013.cs" />
     <Compile Include="Level01\Solution025.cs" />
     <Compile Include="Level02\Solution026.cs" />
     <Compile Include="Level02\Solution027.cs" />
+    <Compile Include="Level02\Solution028.cs" />
+    <Compile Include="Level02\Solution029.cs" />
+    <Compile Include="Level02\Solution030.cs" />
+    <Compile Include="Level02\Solution031.cs" />
+    <Compile Include="Level02\Solution032.cs" />
+    <Compile Include="Level02\Solution033.cs" />
+    <Compile Include="Level02\Solution034.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
