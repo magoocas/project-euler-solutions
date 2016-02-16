@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using CsvHelper;
 using NUnit.Framework;
 
-namespace csharp
+namespace csharp.Tests
 {
     [TestFixture]
     public class SolutionTests

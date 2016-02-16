@@ -6,8 +6,36 @@ namespace csharp.Utility
 {
     public static class ToolBox
     {
+        public static bool IsPalindrome(int number, int numberBase)
+        {
+            var num = number;
+            var palindrome = num % numberBase;
+            while ((num /= numberBase) > 0)
+            {
+                palindrome = palindrome * numberBase + num % numberBase;
+            }
+            return number == palindrome;
+        }
 
+        public static ulong Base10RotateRightUInt64(ulong number)
+        {
+            var digits = NumberToDigits(number).ToArray();
+            ulong result = digits[0];
+            for (int i = digits.Length - 1; i >= 1; i--)
+            {
+                result = result*10 + digits[i];
+            }
+            return result;
+        }
 
+        public static IEnumerable<ulong> NumberToDigits(ulong number)
+        {
+            while (number > 0)
+            {
+                yield return number % 10;
+                number /= 10;
+            }
+        }
         public static IEnumerable<int> NumberToDigits(int number)
         {
             while (number>0)

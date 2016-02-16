@@ -28,16 +28,9 @@ namespace csharp.Level01
                 for (var j = i; j <= 999; j++)
                     products.Add(i*j);
 
-            return products.Distinct().OrderByDescending(a => a).First(x =>
-            {
-                var num = x;
-                var y = num % 10;
-                while ((num/=10)>0)
-                {
-                    y = y*10+num%10;
-                }
-                return x == y;
-            });
+            return products.Distinct()
+                .OrderByDescending(n => n)
+                .First(n=>ToolBox.IsPalindrome(n,10));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace csharp
+﻿namespace csharp.Tests
 {
     public class SolutionTestCase
     {
