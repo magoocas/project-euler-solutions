@@ -26,6 +26,9 @@
 */
 
 using System;
+using System.Collections.Concurrent;
+using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace csharp.Level01
@@ -37,41 +40,21 @@ namespace csharp.Level01
             long maxDistance = 0;
             long maxNumber = 1;
 
-            var max = 1000000;
-            var chunks = Environment.ProcessorCount;
-            var chunkSize = max / chunks + 1;
-
-            var _lock = new object();
-
-            Parallel.For(0, chunks, i =>
+            Parallel.ForEach(Partitioner.Create(2, 1000000), range =>
             {
-                var chunkStart = i * chunkSize;
-                var chunkMax = i * chunkSize + chunkSize;
-                var chunkMaxDistance = 0;
-                var chunkMaxNumber = 1;
-
-                for (var j = chunkStart; j < chunkMax; j++)
+                for (int i = range.Item1; i <= range.Item2; i++)
                 {
-                    long next = j;
+                    long next = i;
                     var distance = 0;
                     while ((next = (next & 1) == 0 ? next >> 1 : next * 3 + 1) > 1)
                         distance++;
 
-                    if (distance > chunkMaxDistance)
+                    if (distance > maxDistance)
                     {
-                        chunkMaxDistance = distance;
-                        chunkMaxNumber = j;
+                        Interlocked.Exchange(ref maxDistance, distance);
+                        Interlocked.Exchange(ref maxNumber, i);
                     }
                 }
-                lock (_lock)
-                {
-                    if (chunkMaxDistance > maxDistance)
-                    {
-                        maxDistance = chunkMaxDistance;
-                        maxNumber = chunkMaxNumber;
-                    }
-                }
-
             });
 
             return maxNumber;

@@ -19,30 +19,34 @@
     Url: https://projecteuler.net/problem=21
 */
 
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
+using System.Threading.Tasks;
 using csharp.Utility;
 
 namespace csharp.Level01
 {
     public class Solution021 : SolutionBase
     {
-        private ulong d(ulong n)
+        private int d(int n)
         {
-            var divisors = ToolBox.GetDivisors(n, true);
-            return divisors.Aggregate((a, b) => a + b);
+            var divisors = ToolBox.GetDivisors((ulong)n, true);
+            return divisors.Aggregate(0,(a, b) => a + (int)b);
         }
 
         public override object Answer()
         {
-            ulong sum = 0;
-
-            for (ulong a = 1; a <= 10000; a++)
+            int sum = 0;
+            
+            Parallel.ForEach(Partitioner.Create(1, 10001), range =>
             {
-                var b = d(a);
-                if (b != a && a == d(b))
-                    sum += a;
-            }
+                for (int a = range.Item1; a <= range.Item2; a++)
+                {
+                    var b = d(a);
+                    if (b != a && a == d(b))
+                        sum += a;
+                }
+            });
 
             return sum;
         }

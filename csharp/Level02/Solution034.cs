@@ -15,7 +15,7 @@
     Url: https://projecteuler.net/problem=34
 */
 
-using System;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,30 +25,19 @@ namespace csharp.Level02
 {
     public class Solution034 : SolutionBase
     {
-
         public override object Answer()
         {
             int sum = 0;
-            var max = ToolBox.Factorial(9)*9;
+            var max = Enumerable.Range(1,9).Select(ToolBox.Factorial).Sum();
 
-            var chunks = Environment.ProcessorCount;
-            var chunkSize = max/chunks + 1;
-            var results = new int[chunks];
-
-            Parallel.For(0, chunks, ()=>0, (i,loop,chunkSum) =>
+            Parallel.ForEach(Partitioner.Create(3, max), range =>
             {
-                var chunkStart = i*chunkSize;
-                var chunkMax = i*chunkSize + chunkSize;
-                for (int j = chunkStart; j < chunkMax; j++)
-                {
-                    if (j == ToolBox.NumberToDigits(j).Select(ToolBox.Factorial).Sum())
-                        chunkSum += j;
-                }
-                return chunkSum;
-            }, chunkSum => Interlocked.Add(ref sum, chunkSum));
+                for (int i = range.Item1; i <= range.Item2; i++)
+                    if (i == ToolBox.NumberToDigits(i).Select(ToolBox.Factorial).Sum())
+                        Interlocked.Add(ref sum, i);
+            });
 
-
-			return sum-3;
+            return sum;
         }
     }
 }
