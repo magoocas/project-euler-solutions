@@ -1,7 +1,7 @@
 /*
     Problem: 26
 
-    Title: 
+    Title: Reciprocal cycles
 
     Description:
         A unit fraction contains 1 in the numerator. The decimal representation of the

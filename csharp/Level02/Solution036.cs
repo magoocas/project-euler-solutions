@@ -1,7 +1,7 @@
 /*
     Problem: 36
 
-    Title: 
+    Title: Double-base palindromes
 
     Description:
         The decimal number, 585 = 1001001001[2] (binary), is palindromic in both bases.

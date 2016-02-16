@@ -1,7 +1,7 @@
 ﻿/*
     Problem: 20
 
-    Title: 
+    Title: Factorial digit sum
 
     Description:
         n! means n x (n − 1) x ... x 3 x 2 x 1

@@ -1,7 +1,7 @@
 /*
     Problem: 32
 
-    Title: 
+    Title: Pandigital products
 
     Description:
         We shall say that an n-digit number is pandigital if it makes use of all the

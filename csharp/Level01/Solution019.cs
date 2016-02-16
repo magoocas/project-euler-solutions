@@ -1,7 +1,7 @@
 ﻿/*
     Problem: 19
 
-    Title: 
+    Title: Counting Sundays
 
     Description:
         You are given the following information, but you may prefer to do some research

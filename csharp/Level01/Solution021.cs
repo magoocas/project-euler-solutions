@@ -1,7 +1,7 @@
 ﻿/*
     Problem: 21
 
-    Title: 
+    Title: Amicable numbers
 
     Description:
         Let d(n) be defined as the sum of proper divisors of n (numbers less than n

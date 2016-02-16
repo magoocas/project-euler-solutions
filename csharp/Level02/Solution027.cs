@@ -1,7 +1,7 @@
 /*
     Problem: 27
 
-    Title: 
+    Title: Quadratic primes
 
     Description:
         Euler discovered the remarkable quadratic formula:

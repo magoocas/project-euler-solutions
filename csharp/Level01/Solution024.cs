@@ -1,7 +1,7 @@
 /*
     Problem: 24
 
-    Title: 
+    Title: Lexicographic permutations
 
     Description:
         A permutation is an ordered arrangement of objects. For example, 3124 is one

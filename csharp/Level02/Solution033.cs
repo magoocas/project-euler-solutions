@@ -1,7 +1,7 @@
 /*
     Problem: 33
 
-    Title: 
+    Title: Digit cancelling fractions
 
     Description:
         The fraction ^49/[98] is a curious fraction, as an inexperienced mathematician

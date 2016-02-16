@@ -1,7 +1,7 @@
 /*
     Problem: 28
 
-    Title: 
+    Title: Number spiral diagonals
 
     Description:
         Starting with the number 1 and moving to the right in a clockwise direction a 5

@@ -1,7 +1,7 @@
 /*
     Problem: 18
 
-    Title: 
+    Title: Maximum path sum I
 
     Description:
         By starting at the top of the triangle below and moving to adjacent numbers on

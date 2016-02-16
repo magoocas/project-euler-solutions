@@ -1,7 +1,7 @@
 /*
     Problem: 25
 
-    Title: 
+    Title: 1000-digit Fibonacci number
 
     Description:
         The Fibonacci sequence is defined by the recurrence relation:

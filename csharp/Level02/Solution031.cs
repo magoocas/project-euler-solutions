@@ -1,7 +1,7 @@
 /*
     Problem: 31
 
-    Title: 
+    Title: Coin sums
 
     Description:
         In England the currency is made up of pound, -L-, and pence, p, and there are

@@ -1,7 +1,7 @@
 /*
     Problem: 22
 
-    Title: 
+    Title: Names scores
 
     Description:
         Using names.txt {Problem022.txt} (right click and 'Save Link/Target As...'), a 46K text file

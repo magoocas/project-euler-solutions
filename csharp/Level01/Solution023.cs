@@ -1,7 +1,7 @@
 /*
     Problem: 23
 
-    Title: 
+    Title: Non-abundant sums
 
     Description:
         A perfect number is a number for which the sum of its proper divisors is

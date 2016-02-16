@@ -1,7 +1,7 @@
 /*
     Problem: 29
 
-    Title: 
+    Title: Distinct powers
 
     Description:
         Consider all integer combinations of a^b for 2 ≤ a ≤ 5 and 2 ≤ b ≤ 5:
