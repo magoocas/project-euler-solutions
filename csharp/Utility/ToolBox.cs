@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
+using System.Diagnostics;
 
 namespace csharp.Utility
 {
@@ -45,6 +47,19 @@ namespace csharp.Utility
             }
         }
 
+        public static ulong DigitsToNumber(ulong[] digits, int start, int count)
+        {
+            ulong result = 0;
+            ulong magnitude = 1;
+
+            for (int i = start; i < start+count; i++)
+            {
+                result += digits[i] * magnitude;
+                magnitude *= 10;
+            }
+
+            return result;
+        }
         public static IEnumerable<ulong> GetPrimeFactors(ulong number)
         {
             var numberToFactor = number;
