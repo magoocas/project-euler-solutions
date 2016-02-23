@@ -24,18 +24,47 @@ namespace csharp.Utility
             Denominator = denominator;
         }
 
+        public static Rational Add(Rational a, Rational b)
+        {
+            var commonDenominator = a.Denominator*b.Denominator;
+            return new Rational(a.Numerator*b.Denominator + b.Numerator*a.Denominator, a.Denominator*b.Denominator);
+        }
+
+        public static Rational Subtract(Rational a, Rational b)
+        {
+            var commonDenominator = a.Denominator * b.Denominator;
+            return new Rational(a.Numerator*b.Denominator - b.Numerator*a.Denominator, a.Denominator*b.Denominator);
+        }
+
         public static Rational Multiply(Rational a, Rational b)
         {
             return new Rational(a.Numerator*b.Numerator, a.Denominator*b.Denominator);
+        }
+
+        public static Rational Divide(Rational a, Rational b)
+        {
+            return new Rational(a.Numerator * b.Denominator, a.Denominator * b.Numerator);
         }
 
         public static bool Equals(Rational a, Rational b)
         {
             return a.Numerator == b.Numerator && a.Denominator == b.Denominator;
         }
+        public static Rational operator +(Rational a, Rational b)
+        {
+            return Add(a, b);
+        }
+        public static Rational operator -(Rational a, Rational b)
+        {
+            return Subtract(a, b);
+        }
         public static Rational operator *(Rational a, Rational b)
         {
             return Multiply(a, b);
+        }
+        public static Rational operator /(Rational a, Rational b)
+        {
+            return Divide(a, b);
         }
 
         public static bool operator ==(Rational a, Rational b)

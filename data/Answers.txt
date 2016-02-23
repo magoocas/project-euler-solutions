@@ -37,4 +37,6 @@ Solution035,55
 Solution036,872187
 Solution037,748317
 Solution038,932718654
+Solution039,840
+Solution040,210
 Solution067,7273
