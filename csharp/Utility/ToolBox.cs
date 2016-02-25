@@ -1,13 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Constraints;
-using System.Diagnostics;
 
 namespace csharp.Utility
 {
     public static class ToolBox
     {
+        public static bool IsPandigital(int number)
+        {
+            var count = 0;
+            var maxDigit = 1;
+            var digits = new bool[10];
+            while (number > 0)
+            {
+                var digit = number%10;
+                if (digits[digit] || digit==0)
+                    return false;
+                digits[digit] = true;
+                if (digit > maxDigit) maxDigit = digit;
+                number /= 10;
+                count++;
+            }
+            return count==maxDigit;
+        }
+
         public static bool IsPalindrome(int number, int numberBase)
         {
             var num = number;
@@ -111,32 +127,64 @@ namespace csharp.Utility
             }
             return sieve;
         }
-
-        public static IEnumerable<ulong> GetPrimes(ulong searchLimit)
+        public  static ulong Min(ulong left, ulong right)
         {
-            ulong prime = 2;
+            return left < right ? left : right;
+        }
 
-            var sieve = new bool[searchLimit + 1L];
-            sieve[0] = sieve[1] = true;
-
-            while (true)
+        public static IEnumerable<ulong> GetPrimes(ulong limit, int segment_size = 32768)
+        {
             {
-                yield return prime;
+                int sqrt = (int)Math.Sqrt(limit);
+                ulong count = (limit < 2) ? 0ul : 1ul;
+                ulong s = 2;
+                ulong n = 3;
 
-                for (var multiple = prime+prime; multiple < (ulong)sieve.LongLength; multiple += prime)
-                    sieve[multiple] = true;
+                yield return 2ul;
+                // generate small primes <= sqrt
+                var is_prime = new bool[sqrt + 1];
 
-                ulong possiblePrime;
-                for (possiblePrime = prime + 1; possiblePrime < (ulong) sieve.LongLength; possiblePrime++)
+                for (int i = 2; i * i <= sqrt; i++)
+                    if (!is_prime[i])
+                        for (int j = i * i; j <= sqrt; j += i)
+                            is_prime[j] = true;
+
+                var primes = new List<int>();
+                var next = new List<int>(); ;
+
+                for (ulong low = 0; low <= limit; low += (ulong)segment_size)
                 {
-                    if (!sieve[possiblePrime])
+                    // vector used for sieving
+                    var sieve = new bool[segment_size];
+
+                    // current segment = interval [low, high]
+                    ulong high = Min(low + (ulong)segment_size - 1, limit);
+
+                    // store small primes needed to cross off multiples
+                    for (; s * s <= high; s++)
                     {
-                        prime = possiblePrime;
-                        break;
+                        if (!is_prime[(int)s])
+                        {
+                            primes.Add((int)s);
+                            next.Add((int)(s * s - low));
+                        }
                     }
+                    // sieve the current segment
+                    for (int i = 1; i < primes.Count; i++)
+                    {
+                        int j = next[i];
+                        for (int k = primes[i] * 2; j < segment_size; j += k)
+                            sieve[j] = true;
+                        next[i] = j - segment_size;
+                    }
+
+                    for (; n <= high; n += 2)
+                        if (!sieve[(int)(n - low)]) // n is a prime
+                        {
+                            count++;
+                            yield return n;
+                        }
                 }
-                if (possiblePrime == (ulong) sieve.LongLength)
-                    break;
             }
         }
 

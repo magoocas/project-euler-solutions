@@ -23,7 +23,8 @@
 
     Url: https://projecteuler.net/problem=38
 */
-using System.Globalization;
+
+using csharp.Utility;
 
 namespace csharp.Level02
 {
@@ -40,27 +41,6 @@ namespace csharp.Level02
             return high + low;
         }
 
-        bool IsPandigital(int number)
-        {
-            if (number < 123456789)
-                return false;
-            
-            var digits = new bool[9];
-            var count = 0;
-
-            while(number>0)
-            {
-                var digit = number % 10;
-                if (digit < 1 || digits[digit-1])
-                    return false;
-                digits[digit-1] = true;
-                number /= 10;
-                count++;
-            }
-            if (count < 9)
-                return false;
-            return true;
-        }
 
         public int GetConcatenatedProduct(int number, int n)
         {
@@ -81,7 +61,7 @@ namespace csharp.Level02
                 {
                     number++;
                     product = GetConcatenatedProduct(number, n);
-                    if (product > max && IsPandigital(product))
+                    if (product > max && product >= 123456789 && ToolBox.IsPandigital(product))
                         max = product;
                 }
             }

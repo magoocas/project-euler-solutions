@@ -5,6 +5,25 @@ namespace csharp.Utility
 {
     public struct Rational
     {
+        public bool Equals(Rational other)
+        {
+            return Numerator == other.Numerator && Denominator == other.Denominator;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            return obj is Rational && Equals((Rational) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Numerator.GetHashCode()*397) ^ Denominator.GetHashCode();
+            }
+        }
+
         public long Numerator { get; }
         public long Denominator { get; }
         public Rational(long numerator, long denominator)
