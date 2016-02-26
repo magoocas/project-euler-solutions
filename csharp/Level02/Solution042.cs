@@ -23,7 +23,7 @@
 */
 
 using csharp.Utility;
-using NUnit.Framework;
+using System;
 
 namespace csharp.Level02
 {
@@ -32,52 +32,10 @@ namespace csharp.Level02
         
         public override object Answer()
         {
-            //var primeList = PrimeGenerator.GetPrimes(100000000);
-
-            Time.This(()=>PrimeGenerator.PrimeSieve(100000000), "1) ");
-
-            //Assert.That(primeList, Is.EqualTo(PrimeGenerator.GetPrimes(100000000)));
-            PrimeGenerator.ClearCache();
-
-            Time.This(() =>
+            foreach(var prime in PrimeGenerator2.PrimeSieve.GetPrimes(0,10))
             {
-                PrimeGenerator.PrimeSieve(100000000);
-                PrimeGenerator.PrimeSieve(100000000);
-            },"2) ");
-
-            PrimeGenerator.ClearCache();
-
-            Time.This(() =>
-            {
-                PrimeGenerator.PrimeSieve(10000000);
-                PrimeGenerator.PrimeSieve(100000000);
-            }, "3) ");
-
-            PrimeGenerator.ClearCache();
-
-            PrimeGenerator.PrimeSieve(50000000);
-            Time.This(() =>
-            {
-                PrimeGenerator.PrimeSieve(100000000);
-            }, "4) ");
-
-            PrimeGenerator.ClearCache();
-
-            Time.This(() =>
-            {
-                PrimeGenerator.PrimeSieve(100000000);
-            }, "5) ");
-
-            PrimeGenerator.ClearCache();
-
-            Time.This(() =>
-            {
-                PrimeGenerator2.ExpandSieve(100000000);
-            }, "6) ");
-
-            PrimeGenerator.ClearCache();
-            //PrimeGenerator.PrimeSieve(7654321);
-
+                Console.WriteLine(prime);
+            }
             return 0;
         }
         

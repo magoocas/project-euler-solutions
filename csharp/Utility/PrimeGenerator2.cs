@@ -1,9 +1,7 @@
 ﻿//Adapted from http://primesieve.org/segmented_sieve.html
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 
 namespace csharp.Utility
@@ -30,7 +28,7 @@ namespace csharp.Utility
             ClearCache();
         }
 
-        public static PrimeSieve PrimeSieve => _primeSieve;
+        public static PrimeSieve PrimeSieve { get { return _primeSieve; } }
 
         public static void ClearCache()
         {

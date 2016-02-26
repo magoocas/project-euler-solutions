@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace csharp.Utility
 {
@@ -36,16 +32,17 @@ namespace csharp.Utility
                 _internalList.Add(new BitVector32(value));
             }
             _count += (ulong)segmentCount*BitCount;
-            //first sieving?
-            if (_count == PrimeGenerator2.SegmentSize)
-                _internalList[0] = new BitVector32(_internalList[0].Data | 1<<2|1<<3|1<<5|1<<7);
         }
 
         public bool IsPrime(ulong index)
         {
+            if (index % 2 == 0)
+                return false;
+            if (index > _count)
+                PrimeGenerator2.ExpandSieve(index);
             var listIndex = (int)index / BitCount;
             var bitIndex = (int)index % BitCount;
-            return _internalList[listIndex][bitIndex];
+            return !_internalList[listIndex][bitIndex];
         }
         public bool this[ulong index]
         {
@@ -56,24 +53,30 @@ namespace csharp.Utility
             get { return IsPrime((ulong)index); }
         }
 
-        public ulong Count => _count;
+        public ulong Count { get { return _count; } }
 
 
         public IEnumerable<ulong> GetPrimes(ulong min = 0, ulong max = 0)
         {
-            int j = (int)min % 32;
-            ulong n = min;
+            if (max > _count)
+                PrimeGenerator2.ExpandSieve(max);
+            if(min<=2)
+                yield return 2;
+            if(min < 3)
+                min = 3;
 
-            for (int i = (int) min/32; i < _internalList.Count; i++)
+            ulong n = min;
+            int j = (int)min % BitCount;
+            for (int i = (int) min/BitCount; i < _internalList.Count; i++)
             {
-                for (; j < 31; j++)
+                for (; j < BitCount; j+=2)
                 {
-                    if (_internalList[i][j])
+                    if (!_internalList[i][j])
                         yield return n;
-                    if (++n > max)
+                    if ((n+=2ul) > max)
                         yield break;
                 }
-                j = 0;
+                j = 1;
             }
         }
     }
