@@ -32,9 +32,8 @@ namespace csharp.Level02
         
         public override object Answer()
         {
-            foreach(var prime in PrimeGenerator2.PrimeSieve.GetPrimes(0,10))
+            foreach(var prime in PrimeGenerator.PrimeSieve.GetPrimes(0,10))
             {
-                Console.WriteLine(prime);
             }
             return 0;
         }

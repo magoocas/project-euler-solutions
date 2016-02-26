@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\PrimeTests.cs" />
     <Compile Include="Utility\Pandigital.cs" />
     <Compile Include="SolutionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,7 +59,6 @@
     <Compile Include="Tests\SolutionTests.cs" />
     <Compile Include="Tests\SolutionTestCase.cs" />
     <Compile Include="Utility\PrimeSieve.cs" />
-    <Compile Include="Utility\PrimeGenerator2.cs" />
     <Compile Include="Utility\PrimeGenerator.cs" />
     <Compile Include="Utility\Rational.cs" />
     <Compile Include="Utility\TimeThis.cs" />

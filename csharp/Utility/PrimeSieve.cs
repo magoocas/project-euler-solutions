@@ -1,23 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Text;
 
 namespace csharp.Utility
 {
     public class PrimeSieve
     {
+        private struct PrimeBitVector
+        {
+            private readonly int _value;
+
+            public PrimeBitVector(int value)
+            {
+                _value = value;
+            }
+
+            public bool this[int bitIndex]
+            {
+                get { return (_value & 1 << bitIndex) != 0; }
+            }
+            public override string ToString()
+            {
+                var localValue = _value;
+                var sb = new StringBuilder(32);
+                for (int i = 0; i < BitCount; i++)
+                {
+                    if ((localValue & 0x80000000) != 0)
+                        sb.Append("1");
+                    else
+                        sb.Append("0");
+                    localValue <<= 1;
+                }
+                return sb.ToString();
+            }
+        }
+
         private const int BitCount = 32;
-        private List<BitVector32> _internalList;
+        private List<PrimeBitVector> _internalList;
         private ulong _count;
 
         public PrimeSieve()
         {
-            _internalList = new List<BitVector32>();
+            _internalList = new List<PrimeBitVector>();
         }
 
         public void AddSegment(bool[] sieveSegment)
         {
-            if(sieveSegment.Length != PrimeGenerator2.SegmentSize)
+            if(sieveSegment.Length != PrimeGenerator.SegmentSize)
                 throw new Exception("Sieve segment size must match generator.");
 
             var segmentCount = sieveSegment.Length/BitCount;
@@ -27,11 +56,12 @@ namespace csharp.Utility
                 for (int j = 0; j < BitCount; j++)
                 {
                     if (sieveSegment[i*BitCount + j])
-                        value |= 1 << j;
+                        value = unchecked(value | 1 << j);
+
                 }
-                _internalList.Add(new BitVector32(value));
+                _internalList.Add(new PrimeBitVector(value));
             }
-            _count += (ulong)segmentCount*BitCount;
+            _count += (ulong) sieveSegment.Length;
         }
 
         public bool IsPrime(ulong index)
@@ -39,7 +69,7 @@ namespace csharp.Utility
             if (index % 2 == 0)
                 return false;
             if (index > _count)
-                PrimeGenerator2.ExpandSieve(index);
+                PrimeGenerator.ExpandSieve(index);
             var listIndex = (int)index / BitCount;
             var bitIndex = (int)index % BitCount;
             return !_internalList[listIndex][bitIndex];
@@ -54,26 +84,30 @@ namespace csharp.Utility
         }
 
         public ulong Count { get { return _count; } }
-
-
-        public IEnumerable<ulong> GetPrimes(ulong min = 0, ulong max = 0)
+        
+        public IEnumerable<ulong> GetPrimes(ulong max = 0, ulong min = 0)
         {
+            if(max == 0)
+                max = _count;
+
             if (max > _count)
-                PrimeGenerator2.ExpandSieve(max);
+                PrimeGenerator.ExpandSieve(max);
             if(min<=2)
                 yield return 2;
             if(min < 3)
                 min = 3;
 
-            ulong n = min;
-            int j = (int)min % BitCount;
-            for (int i = (int) min/BitCount; i < _internalList.Count; i++)
+            ulong n=min;
+            if ((min & 1) == 0)
+                n++;
+            int j = (int)n % BitCount;
+            for (int i = (int) n/BitCount; i < _internalList.Count; i++)
             {
-                for (; j < BitCount; j+=2)
+                for (; j < BitCount; j+=2, n+=2)
                 {
                     if (!_internalList[i][j])
                         yield return n;
-                    if ((n+=2ul) > max)
+                    if (n > max)
                         yield break;
                 }
                 j = 1;
