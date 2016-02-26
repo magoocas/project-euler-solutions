@@ -14,6 +14,8 @@
     Url: https://projecteuler.net/problem=41
 */
 
+using System.Collections.Generic;
+using System.Linq;
 using csharp.Utility;
 
 namespace csharp.Level02
@@ -23,11 +25,13 @@ namespace csharp.Level02
         
         public override object Answer()
         {
-            var primes = PrimeGenerator.GetPrimes(7654321);
-            for (int i = primes.Count - 1; i >= 0; i--)
+            PrimeGenerator2.ExpandSieve(7654321);
+            foreach (var n in Pandigital.Pick(new List<int> {7,6,5,4,3,2,1}))
             {
-                if (ToolBox.IsPandigital((int)primes[i]))
-                    return primes[i];
+                if (PrimeGenerator2.PrimeSieve[n])
+                {
+                    return n;
+                }
             }
 
             return -1;

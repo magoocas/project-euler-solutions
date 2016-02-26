@@ -1,17 +1,21 @@
 ﻿//Adapted from http://primesieve.org/segmented_sieve.html
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace csharp.Utility
 {
-    public static class PrimeGenerator
+    public static class PrimeGenerator2
     {
+        public const int SegmentSize = 32768;
+
+        private static PrimeSieve _primeSieve;
         private static List<int> _nextCache;
         private static List<int> _smallPrimeCache;
         private static List<bool> _smallPrimeSieve;
-        private static HashSet<ulong> _primeCache;
         private static ulong _s;
         private static ulong _n;
         private static ulong _maxSieved;
@@ -21,25 +25,27 @@ namespace csharp.Utility
             return left < right ? left : right;
         }
 
-        static PrimeGenerator()
+        static PrimeGenerator2()
         {
             ClearCache();
         }
 
+        public static PrimeSieve PrimeSieve => _primeSieve;
+
         public static void ClearCache()
         {
+            _primeSieve = new PrimeSieve();
             _nextCache = new List<int>();
             _smallPrimeCache = new List<int>();
             _smallPrimeSieve = new List<bool>();
-            _primeCache = new HashSet<ulong>();
             _s = 2;
             _n = 3;
             _maxSieved = 0;
         }
 
-        public static void PrimeSieve(ulong limit, int segmentSize = 32768)
+        public static void ExpandSieve(ulong limit)
         {
-            limit += limit%(ulong) segmentSize;
+            limit += limit%SegmentSize;
 
             if (limit <= _maxSieved)
                 return;
@@ -56,13 +62,13 @@ namespace csharp.Utility
                         _smallPrimeSieve[j] = true;
 
 
-            for (ulong low = _maxSieved; low <= limit; low += (ulong) segmentSize)
+            for (ulong low = _maxSieved; low <= limit; low += SegmentSize)
             {
                 // vector used for sieving
-                var sieve = new bool[segmentSize];
+                var sieve = new bool[SegmentSize];
 
                 // current segment = interval [low, high]
-                ulong high = Min(low + (ulong) segmentSize - 1, limit);
+                ulong high = Min(low + SegmentSize - 1, limit);
 
                 // store small primes needed to cross off multiples
                 for (; _s*_s <= high; _s++)
@@ -77,25 +83,14 @@ namespace csharp.Utility
                 for (int i = 1; i < _smallPrimeCache.Count; i++)
                 {
                     int j = _nextCache[i];
-                    for (int k = _smallPrimeCache[i]*2; j < segmentSize; j += k)
+                    for (int k = _smallPrimeCache[i]*2; j < SegmentSize; j += k)
                         sieve[j] = true;
-                    _nextCache[i] = j - segmentSize;
+                    _nextCache[i] = j - SegmentSize;
                 }
                 
-                for (; _n <= high; _n += 2)
-                    if (!sieve[(int)(_n - low)]) // n is a prime
-                        _primeCache.Add(_n);
+                _primeSieve.AddSegment(sieve);
             }
             _maxSieved = limit;
-        }
-
-
-
-        public static HashSet<ulong> GetPrimes(ulong limit)
-        {
-            if (limit > _primeCache.LastOrDefault())
-                PrimeSieve(limit);
-            return _primeCache;
         }
         
     }

@@ -22,60 +22,21 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using csharp.Utility;
 
 namespace csharp.Level02
 {
     public class Solution032 : SolutionBase
     {
 
-        public IEnumerable<int> Pick(List<int> digits, int count, int start= 0)
-        {
-
-            for (int i = start; i < digits.Count; i++)
-            {
-                var digit = digits[i];
-
-                digits.RemoveAt(i);
-
-                if (count == 1)
-                    yield return digit;
-                else
-                    foreach (var number in Pick(digits, count - 1))
-                        yield return number*10 + digit;
-
-                digits.Insert(i, digit);
-            }
-        }
-
-        public bool IsPandigital(int num, List<int> digits)
-        {
-            var isPandigital = true;
-            var alreadyEncountered = new bool[10];
-
-            while (num > 0)
-            {
-                var digit = num%10;
-
-                if (alreadyEncountered[digit])
-                    return false;
-                alreadyEncountered[digit] = true;
-
-                if (!digits.Contains(digit))
-                    return false;
-
-                num /= 10;
-            }
-            return true;
-        }
-
         public IEnumerable<int> GetPandigitalProducts(List<int> digits, int firstNumSize, int secondNumSize)
         {
-            foreach (var num1 in Pick(digits, firstNumSize))
+            foreach (var num1 in Pandigital.Pick(digits, firstNumSize))
             {
-                foreach (var num2 in Pick(digits, secondNumSize))
+                foreach (var num2 in Pandigital.Pick(digits, secondNumSize))
                 {
                     var product = num1 * num2;
-                    if (IsPandigital(product, digits))
+                    if (Pandigital.IsPandigital(product, digits))
                         yield return product;
                 }
 
