@@ -24,18 +24,20 @@
 
 using csharp.Utility;
 using System;
+using System.Linq;
 
 namespace csharp.Level02
 {
     public class Solution042 : SolutionBase
     {
-        
+        private bool IsTriangle(int wordValue) => Math.Abs((-1 + Math.Sqrt(1 + 8*wordValue))/2%1) < double.Epsilon;
+        private int WordValue(string word) => word.ToUpper().ToCharArray().Sum(c => c - 64);
+
+
         public override object Answer()
         {
-            foreach(var prime in PrimeGenerator.PrimeSieve.GetPrimes(0,10))
-            {
-            }
-            return 0;
+            var words = GetProblemDataAsArray(",", s => s.Trim('"'));
+            return words.Select(WordValue).Where(IsTriangle).Count();
         }
         
     }
