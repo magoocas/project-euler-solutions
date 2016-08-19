@@ -46,21 +46,67 @@ namespace csharp.Utility
             return result;
         }
 
-        public static IEnumerable<ulong> NumberToDigits(ulong number)
+        public static IEnumerable<ulong> NumberToDigits(ulong number, int width = 0)
         {
+            var digitCount = 0;
             while (number > 0)
             {
                 yield return number % 10;
                 number /= 10;
+                digitCount++;
             }
+            if (digitCount < width)
+                yield return 0;
         }
-        public static IEnumerable<int> NumberToDigits(int number)
+        public static IEnumerable<long> NumberToDigits(long number, int width = 0)
         {
+            var digitCount = 0;
+            while (number > 0)
+            {
+                yield return number % 10;
+                number /= 10;
+                digitCount++;
+            }
+            if (digitCount < width)
+                yield return 0;
+        }
+
+        public static int DigitsToNumber(int[] digits, int start, int count)
+        {
+            int result = 0;
+            int magnitude = 1;
+            
+            if(count > 0)
+            {
+                for (int i = start; i < start + count; i++)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
+            }
+            else
+            {
+                for (int i = start; i > start + count; i--)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
+            }
+
+            return result;
+        }
+
+        public static IEnumerable<int> NumberToDigits(int number, int width = 0)
+        {
+            var digitCount = 0;
             while (number>0)
             {
                 yield return number%10;
                 number /= 10;
+                digitCount++;
             }
+            if (digitCount < width)
+                yield return 0;
         }
 
         public static ulong DigitsToNumber(ulong[] digits, int start, int count)
@@ -68,10 +114,45 @@ namespace csharp.Utility
             ulong result = 0;
             ulong magnitude = 1;
 
-            for (int i = start; i < start+count; i++)
+            if (count > 0)
             {
-                result += digits[i] * magnitude;
-                magnitude *= 10;
+                for (int i = start; i < start + count; i++)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
+            }
+            else
+            {
+                for (int i = start; i > start + count; i--)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
+            }
+
+            return result;
+        }
+        public static long DigitsToNumber(long[] digits, int start, int count)
+        {
+            long result = 0;
+            long magnitude = 1;
+
+            if (count > 0)
+            {
+                for (int i = start; i < start + count; i++)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
+            }
+            else
+            {
+                for (int i = start; i > start + count; i--)
+                {
+                    result += digits[i] * magnitude;
+                    magnitude *= 10;
+                }
             }
 
             return result;

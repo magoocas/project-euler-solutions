@@ -58,6 +58,7 @@
     <Compile Include="Tests\ToolBoxTests.cs" />
     <Compile Include="Tests\SolutionTests.cs" />
     <Compile Include="Tests\SolutionTestCase.cs" />
+    <Compile Include="Utility\PandigitalNumber.cs" />
     <Compile Include="Utility\PrimeSieve.cs" />
     <Compile Include="Utility\PrimeGenerator.cs" />
     <Compile Include="Utility\Rational.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Level02\Solution040.cs" />
     <Compile Include="Level02\Solution041.cs" />
     <Compile Include="Level02\Solution042.cs" />
+    <Compile Include="Level02\Solution043.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -213,3 +213,7 @@ ModelManifest.xml
 
 # *nix dev machines mono executables
 *.exe
+
+
+#project rider files
+.idea/
