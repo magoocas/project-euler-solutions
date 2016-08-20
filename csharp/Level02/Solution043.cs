@@ -25,31 +25,160 @@
     Url: https://projecteuler.net/problem=43
 */
 
+using System;
+using System.Collections;
 using System.Collections.Generic;
-using csharp.Utility;
 using System.Linq;
 
 namespace csharp.Level02
 {
+    public class PanDigitialSet
+    {
+        private List<long> _digitList;
+        private bool[] _digits;
+
+        public PanDigitialSet()
+        {
+            _digits = new bool[10];
+            _digitList = new List<long>();
+        }
+
+        public IEnumerable<long> UnusedDigits => _digits
+            .Select((b, i) => new {b, i})
+            .Where(x => !x.b)
+            .Select(x => (long)x.i);
+
+        private bool AllDigits(long num, bool leadingZero, bool state)
+        {
+            if (leadingZero && !_digits[0] == state)
+                return false;
+            var localDigits = new bool[10];
+            while (num > 0)
+            {
+                var digit = num % 10;
+                if (!_digits[digit] == state || localDigits[digit])
+                    return false;
+                localDigits[digit] = true;
+                num /= 10;
+            }
+
+            return true;
+        }
+        
+
+        public bool AddDigits(long num, bool leadingZero, bool addToFront, bool reverseDigits)
+        {
+            if (!AllDigits(num, leadingZero, false))
+                return false;
+               
+            var insertIndex = 0;
+            if (!addToFront)
+                insertIndex = _digitList.Count;
+
+            while (num>0)
+            {
+                var digit = num%10;
+                _digits[digit] = true;
+                _digitList.Insert(insertIndex, digit);
+                num /= 10;
+                if (!reverseDigits)
+                    insertIndex++;
+            }
+
+            if (leadingZero)
+            {
+                _digits[0] = true;
+                _digitList.Insert(insertIndex, 0);
+                if (!reverseDigits)
+                    insertIndex++;
+            }
+
+
+            return true;
+        }
+
+        public bool RemoveDigits(long num, bool leadingZero)
+        {
+            if (!AllDigits(num, leadingZero, true))
+                return false;
+
+            if (leadingZero)
+            {
+                _digits[0] = false;
+                _digitList.Remove(0);
+            }
+            
+            while (num>0)
+            {
+                var digit = num % 10;
+                _digits[digit] = false;
+                _digitList.Remove(digit);
+                num /= 10;
+            }
+            return true;
+        }
+
+        public long GetNumber(int start = 0, int count = -1)
+        {
+            long num = 0;
+            long multiplier = 1;
+            if (count == -1)
+                count = _digitList.Count;
+
+            var i = 0;
+            for (int index = start; i < count; i++)
+            {
+                var digit = _digitList[index++];
+                num += digit*multiplier;
+                multiplier *= 10;
+            }
+            return num;
+        }
+        
+    }
     public class Solution043 : SolutionBase
     {
 
+        private readonly long[] _primes = new long[] { 13, 11, 7, 5, 3, 2 };
         public override object Answer()
         {
-            var pandigitals = Pandigital.Pick(new List<long> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+            var digitSet = new PanDigitialSet();
 
-            var primes = new [] { 2, 3, 5, 7, 11, 13, 17 };
-            return pandigitals.Where(n =>
+            var matches = new List<long>();
+            for (int i = 17; i <= 987; i+=17)
             {
-                var digits = ToolBox.NumberToDigits(n,10).Reverse().ToArray();
-                for (int i = primes.Length-1; i >= 0; i--)
-                {
-                    var number = ToolBox.DigitsToNumber(digits, i + 3, -3);
-                    if (number % primes[i] != 0)
-                        return false;
-                }
-                return true;
-            }).Sum();
+                if(!digitSet.AddDigits(i, i<100, false, false))
+                    continue;
+                matches.AddRange(MatchingNumbers(digitSet, 0));
+                digitSet.RemoveDigits(i, i < 100);
+            }
+            return matches.Distinct().Sum();
+        }
+
+        private IEnumerable<long> MatchingNumbers(PanDigitialSet digitSet, int prime)
+        {
+            if (prime == _primes.Length)
+            {
+                var digit = digitSet.UnusedDigits.First();
+                if(digit==0)
+                    yield break;
+                digitSet.AddDigits(digit, false, false, false);
+                var number = digitSet.GetNumber();
+                digitSet.RemoveDigits(digit, false);
+                yield return number;
+                yield break;
+            }
+
+            foreach (var digit in digitSet.UnusedDigits)
+            {
+                var num = digit*100 + digitSet.GetNumber(prime + 1, 2);
+                if (num%_primes[prime] != 0)
+                    continue;
+                digitSet.AddDigits(digit, digit==0,false, false);
+                foreach (var match in MatchingNumbers(digitSet, prime + 1))
+                    yield return match;
+                digitSet.RemoveDigits(digit, digit == 0);
+            }
         }
     }
 }
