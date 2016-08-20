@@ -42,4 +42,5 @@ Solution040,210
 Solution041,7652413
 Solution042,162
 Solution043,16695334890
+Solution044,5482660
 Solution067,7273
