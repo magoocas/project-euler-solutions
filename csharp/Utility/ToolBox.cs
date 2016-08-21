@@ -159,6 +159,12 @@ namespace csharp.Utility
         }
         public static IEnumerable<ulong> GetPrimeFactors(ulong number)
         {
+            if (PrimeGenerator.PrimeSieve[number])
+            {
+                yield return number;
+                yield break;
+            }
+
             var numberToFactor = number;
             ulong potentialPrime = 2;
             while (potentialPrime*2 <= numberToFactor)
