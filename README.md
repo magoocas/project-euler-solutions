@@ -6,3 +6,7 @@ Solutions to Project Euler problems
   - xmlstarlet
   - [html-xml-tools](http://www.w3.org/Tools/HTML-XML-utils/)
   - w3m
+
+## addans script prerequisites
+  - vipe (https://joeyh.name/code/moreutils/)
+  - gpg
