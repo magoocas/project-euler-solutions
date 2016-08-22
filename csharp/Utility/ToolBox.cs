@@ -157,9 +157,9 @@ namespace csharp.Utility
 
             return result;
         }
-        public static IEnumerable<ulong> GetPrimeFactors(ulong number)
+        public static IEnumerable<ulong> GetPrimeFactors(ulong number, bool shortCircuitOnPrimes = false)
         {
-            if (PrimeGenerator.PrimeSieve[number])
+            if (shortCircuitOnPrimes && PrimeGenerator.PrimeSieve[number])
             {
                 yield return number;
                 yield break;

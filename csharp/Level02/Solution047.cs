@@ -35,7 +35,7 @@ namespace csharp.Level02
             {
                 for (ulong j = 0; j < 4; j++)
                 {
-                    if (ToolBox.GetPrimeFactors(i + j).Distinct().Count() != 4)
+                    if (ToolBox.GetPrimeFactors(i + j, true).Distinct().Count() != 4)
                     {
                         i += j;
                         break;
