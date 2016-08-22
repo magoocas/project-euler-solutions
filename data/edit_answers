@@ -1,3 +1,4 @@
 #/bin/bash
 
 gpg --passphrase-file ~/.travis-passphrase -o - Answers.txt.gpg | EDITOR=nano vipe | gpg --passphrase-file ~/.travis-passphrase -o Answers.txt.gpg --batch --yes -c
+gpg --passphrase-file ~/.travis-passphrase --batch --yes Answers.txt.gpg
