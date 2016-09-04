@@ -5,10 +5,5 @@ install:
 script:
   - xbuild /p:Configuration=Release csharp/csharp.sln
   - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./csharp/bin/Release/csharp.dll
-env:
-  global:
-    secure: "YajS9X/OYudcyjk2Wq6AJb445Amhy4rJU4UGZdzFzBLMVcDSt922mrgChrlq1kpYafh66Xm3m1EJxCt1RVjxNRv5i0Tq1jzpNQBFq20FjKIOZ0/a4WR8VYk0O+z5gD1SRosjNvlDEz0539bpoofh5BLKdgzT0VHEQ641ckzqY0piH9lSlPKF+t5sFSUQO1ZXUCepP3IPhGrYH3H+AsG+Z+jAnI+2fahbAyirooXixJ/n/xdGwbThVhHXnQThoGOSgElh6Z25QHqP3NWqS7sV+6hr7QjLDr6sYHXVmlEf9KOKqNS7ZGUCzefmwVC7LkwJZ+CVucRcI405CvaEmuamJ+e2Tg/00t5Vkg2s9zHUhtpOghxJkfA6inr27bf64hCCtS6KBlbbW3a7BPHYzk2t0oyoGEbdDL01ucLq6BzlhfmFRszJLqCuPtz8/XZyPNdRFxQUaoxjBa9brl4gcoTb+523pvhIZeOn00IXl19yCLUGUthR1g31IAOH0/CeV7vmmS7zKlxhqhiqCg3wRH4NlWNt0oJVxlYRihqepLha/R2A4vXifer31eFaoKwCIu8OOopUmEPnpASIGMAcfFM+jk8/efryX0/lvG5uLgNMiWnMDbOIWaZH/gvRUjb05rc8dFV8QtVJ417EWfIz25zRSDucz+NsKp8El02qycUzf/c="
 before_install:
-  - gpg --version
-  - echo $answer_password
   - echo $answer_password | gpg --passphrase-fd 0 -o data/Answers.txt data/Answers.txt.gpg
