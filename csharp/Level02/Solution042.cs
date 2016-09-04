@@ -22,7 +22,6 @@
     Url: https://projecteuler.net/problem=42
 */
 
-using csharp.Utility;
 using System;
 using System.Linq;
 

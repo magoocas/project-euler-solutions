@@ -43,19 +43,10 @@ namespace csharp.Level02
     {
         public override object Answer()
         {
-            var sieve = new bool[13000];
-            var bPrimes = new List<int>();
-            foreach (var prime in ToolBox.GetPrimes((ulong) (sieve.Length - 1)))
-            {
-                sieve[prime] = true;
-                if(prime<1000)
-                    bPrimes.Add((int) prime);
-            }
-
             var quadratic = new Func<int, int, int, int>((n, a, b) => n*n + a*n + b);
             int maxN = 0, maxA = 0, maxB = 0;
             
-            foreach (var b in bPrimes)
+            foreach (var b in ToolBox.PrimeSieve.GetPrimes(1000).Select(p=>(int)p))
             {
                 for (int a = -b+2; a < 1000; a++)
                 {
@@ -63,7 +54,7 @@ namespace csharp.Level02
                     while (true)
                     {
                         var p = quadratic(n, a, b);
-                        if (p<0 || !sieve[p])
+                        if (p<0 || !ToolBox.PrimeSieve[p])
                             break;
                         n++;
                     }

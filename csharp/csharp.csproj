@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Level02\Solution049.cs" />
     <Compile Include="Tests\PrimeTests.cs" />
+    <Compile Include="Utility\Logic.cs" />
     <Compile Include="Utility\Pandigital.cs" />
     <Compile Include="SolutionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,7 +61,6 @@
     <Compile Include="Tests\SolutionTestCase.cs" />
     <Compile Include="Utility\PandigitalNumber.cs" />
     <Compile Include="Utility\PrimeSieve.cs" />
-    <Compile Include="Utility\PrimeGenerator.cs" />
     <Compile Include="Utility\Rational.cs" />
     <Compile Include="Utility\TimeThis.cs" />
     <Compile Include="Utility\ToolBox.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="Level02\Solution036.cs" />
     <Compile Include="Level02\Solution037.cs" />
     <Compile Include="Level02\Solution038.cs" />
-    <Compile Include="Level02\Solution067.cs" />
     <Compile Include="Level02\Solution039.cs" />
     <Compile Include="Level02\Solution040.cs" />
     <Compile Include="Level02\Solution041.cs" />
@@ -114,6 +112,9 @@
     <Compile Include="Level02\Solution046.cs" />
     <Compile Include="Level02\Solution047.cs" />
     <Compile Include="Level02\Solution048.cs" />
+    <Compile Include="Level02\Solution049.cs" />
+    <Compile Include="Level02\Solution050.cs" />
+    <Compile Include="Level03\Solution067.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

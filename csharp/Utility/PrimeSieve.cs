@@ -1,6 +1,7 @@
-﻿using System;
+﻿//Adapted from http://primesieve.org/segmented_sieve.html
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace csharp.Utility
 {
@@ -14,86 +15,76 @@ namespace csharp.Utility
             {
                 _value = value;
             }
-
-            public bool this[int bitIndex]
-            {
-                get { return (_value & 1 << bitIndex) != 0; }
-            }
-            public override string ToString()
-            {
-                var localValue = _value;
-                var sb = new StringBuilder(32);
-                for (int i = 0; i < BitCount; i++)
-                {
-                    if ((localValue & 0x80000000) != 0)
-                        sb.Append("1");
-                    else
-                        sb.Append("0");
-                    localValue <<= 1;
-                }
-                return sb.ToString();
-            }
+            public bool this[int bitIndex] => (_value & 1 << bitIndex) != 0;
         }
 
         private const int BitCount = 32;
+        private const int SegmentSize = 32768;
         private List<PrimeBitVector> _internalList;
-        private ulong _count;
+        private static List<int> _nextCache;
+        private static List<int> _smallPrimeCache;
+        private static List<bool> _smallPrimeSieve;
+        private static ulong _s;
+        private static ulong _maxSieved;
+        private static int _cachedPrimeCount;
+
 
         public PrimeSieve()
         {
+            Clear();
+        }
+        public int Count => _cachedPrimeCount;
+        public bool this[ulong num] => IsPrime(num);
+        public bool this[int num] => IsPrime((ulong)num);
+
+        public void Clear()
+        {
             _internalList = new List<PrimeBitVector>();
+            _nextCache = new List<int>();
+            _smallPrimeCache = new List<int>();
+            _smallPrimeSieve = new List<bool>();
+            _s = 2;
+            _maxSieved = 0;
         }
-
-        public void AddSegment(bool[] sieveSegment)
+        public bool IsPrime(ulong num)
         {
-            if(sieveSegment.Length != PrimeGenerator.SegmentSize)
-                throw new Exception("Sieve segment size must match generator.");
-
-            var segmentCount = sieveSegment.Length/BitCount;
-            for (int i = 0; i < segmentCount; i++)
-            {
-                int value = 0;
-                for (int j = 0; j < BitCount; j++)
-                {
-                    if (sieveSegment[i*BitCount + j])
-                        value = unchecked(value | 1 << j);
-
-                }
-                _internalList.Add(new PrimeBitVector(value));
-            }
-            _count += (ulong) sieveSegment.Length;
-        }
-
-        public bool IsPrime(ulong index)
-        {
-            if (index % 2 == 0)
-                return false;
-            if (index > _count)
-                PrimeGenerator.ExpandSieve(index);
-            var listIndex = (int)index / BitCount;
-            var bitIndex = (int)index % BitCount;
+            if (num % 2 == 0)
+                return num==2;
+            if (num > _maxSieved)
+                ExpandSieve(num);
+            int listIndex = (int)num / BitCount;
+            int bitIndex = (int)num % BitCount;
             return !_internalList[listIndex][bitIndex];
         }
-        public bool this[ulong index]
+
+        public ulong GetNthPrime(int number)
         {
-            get { return IsPrime(index); }
-        }
-        public bool this[int index]
-        {
-            get { return IsPrime((ulong)index); }
+            int n = 0;
+
+            ulong lastPrime = 2;
+            while (n < number)
+            {
+                foreach (ulong prime in GetPrimes(min: lastPrime))
+                {
+                    lastPrime = prime;
+                    if (++n == number)
+                        break;
+                }
+            }
+            return lastPrime;
         }
 
-        public ulong Count { get { return _count; } }
-        
         public IEnumerable<ulong> GetPrimes(ulong max = 0, ulong min = 0)
         {
             if(max == 0)
-                max = _count;
+                max = _maxSieved;
 
-            if (max > _count)
-                PrimeGenerator.ExpandSieve(max);
+            if (max > _maxSieved)
+                ExpandSieve(max);
+
             if(min<=2)
                 yield return 2;
+
             if(min < 3)
                 min = 3;
 
@@ -113,5 +104,85 @@ namespace csharp.Utility
                 j = 1;
             }
         }
+
+        private void AddSegment(bool[] sieveSegment)
+        {
+            int segmentCount = sieveSegment.Length / BitCount;
+            for (int i = 0; i < segmentCount; i++)
+            {
+                int value = 0;
+                for (int j = 0; j < BitCount; j++)
+                {
+                    if (sieveSegment[i*BitCount + j])
+                        value = unchecked(value | 1 << j);
+                    else
+                        _cachedPrimeCount++;
+
+                }
+                _internalList.Add(new PrimeBitVector(value));
+            }
+            _maxSieved += (ulong)sieveSegment.Length;
+        }
+
+        private void ExpandSieve(ulong limit = 0)
+        {
+            if (limit == 0)
+                limit = _maxSieved + SegmentSize;
+
+
+            if (limit <= _maxSieved)
+                return;
+
+            if (limit % SegmentSize != 0)
+                limit += SegmentSize - (limit % SegmentSize);
+
+
+            int sqrtLimit = (int)Math.Ceiling(Math.Sqrt(limit));
+
+            // generate small primes <= sqrt
+            int smallStart = _smallPrimeSieve.Count - 1;
+            _smallPrimeSieve.AddRange(Enumerable.Repeat(false, sqrtLimit - smallStart));
+            for (int i = 2; i * i <= sqrtLimit; i++)
+            {
+                if (_smallPrimeSieve[i]) continue;
+                int start = smallStart > 0 ? smallStart - smallStart % i + i : i * i;
+                for (int j = start; j <= sqrtLimit; j += i)
+                    _smallPrimeSieve[j] = true;
+            }
+
+
+
+            for (ulong low = _maxSieved; low < limit; low += SegmentSize)
+            {
+                // vector used for sieving
+                bool[] sieve = new bool[SegmentSize];
+
+                // current segment = interval [low, high]
+                ulong high = Logic.Min(low + SegmentSize - 1, limit);
+
+                // store small primes needed to cross off multiples
+                for (; _s * _s <= high; _s++)
+                {
+                    if (!_smallPrimeSieve[(int)_s])
+                    {
+                        _smallPrimeCache.Add((int)_s);
+                        _nextCache.Add((int)(_s * _s - low));
+                    }
+                }
+                // sieve the current segment
+                for (int i = 1; i < _smallPrimeCache.Count; i++)
+                {
+                    int j = _nextCache[i];
+                    for (int k = _smallPrimeCache[i] * 2; j < SegmentSize; j += k)
+                        sieve[j] = true;
+                    _nextCache[i] = j - SegmentSize;
+                }
+
+                AddSegment(sieve);
+            }
+            _maxSieved = limit;
+        }
+
+
     }
 }

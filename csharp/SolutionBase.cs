@@ -11,7 +11,7 @@ namespace csharp
     {
         private readonly string _problemData = "";
 
-        public SolutionBase()
+        protected SolutionBase()
         {
             SolutionId = Regex.Match(GetType().Name, "[0-9]{3}$").Value;
             var problemFile = Path.Combine("ProblemData", $"Problem{SolutionId}.txt");
@@ -19,7 +19,7 @@ namespace csharp
                 _problemData = File.ReadAllText(problemFile);
         }
 
-        public string ProblemData
+        protected string ProblemData
         {
             get
             {
@@ -29,21 +29,22 @@ namespace csharp
             }
         }
 
-        public string SolutionId { get; }
+        private string SolutionId { get; }
 
         public static IEnumerable<Type> GetDerivedTypes()
         {
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t => t.BaseType == typeof (SolutionBase));
         }
-        public T[] GetProblemDataAsArray<T>(string rowSeparators, Func<string, T> valueConverter)
+
+        protected T[] GetProblemDataAsArray<T>(string rowSeparators, Func<string, T> valueConverter)
         {
             return ProblemData
                 .Split(rowSeparators.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                 .Select(valueConverter).ToArray();
         }
 
-        public T[][] GetProblemDataAsMatrix<T>(string rowSeparators, string columnSeparators, Func<string, T> valueConverter )
+        protected T[][] GetProblemDataAsMatrix<T>(string rowSeparators, string columnSeparators, Func<string, T> valueConverter )
         {
             return ProblemData
                 .Split(rowSeparators.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using csharp.Utility;
 using NUnit.Framework;
 
@@ -8,20 +9,13 @@ namespace csharp.Tests
     public class PrimeTests
     {
         [Test]
-        public void PrimeGenerator2PrimesLessThan10000000()
+        public void PrimeGeneratorFirstMillion()
         {
-            var primes = PrimeGenerator.PrimeSieve.GetPrimes(10000000);
-            var knownPrimes = File.OpenText(Path.Combine("ProblemData", "primes", "firstmillionprimes.txt"));
+            var knownPrimes = File.ReadAllLines(Path.Combine("ProblemData", "primes", "firstmillionprimes.txt"))
+                .Select(ulong.Parse);
 
-            var n = 0;
-            foreach (var generatedPrime in primes)
-            {
-                n++;
-                var knownPrime = ulong.Parse(knownPrimes.ReadLine());
-
-                Assert.That(generatedPrime, Is.EqualTo(knownPrime), $"Failed at prime n={n}");
-                    
-            }
+            foreach (var prime in knownPrimes)
+                Assert.That(ToolBox.PrimeSieve[prime], $"{prime} detected incorrectly as composite");
         }
     }
 }

@@ -22,7 +22,7 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            return PrimeGenerator.GetNthPrime(10001);
+            return ToolBox.PrimeSieve.GetNthPrime(10001);
         }
     }
 }

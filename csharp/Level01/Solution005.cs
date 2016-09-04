@@ -12,7 +12,6 @@
     Url: https://projecteuler.net/problem=5
 */
 
-using System;
 using System.Linq;
 using csharp.Utility;
 

@@ -26,7 +26,7 @@ namespace csharp.Level02
         {
             foreach (var n in Pandigital.Pick(new List<int> {7,6,5,4,3,2,1}))
             {
-                if (PrimeGenerator.IsPrime(n))
+                if (ToolBox.PrimeSieve[(ulong)n])
                     return n;
             }
 

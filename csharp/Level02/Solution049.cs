@@ -49,7 +49,7 @@ namespace csharp.Level02
         }
         public override object Answer()
         {
-            var primes = PrimeGenerator.PrimeSieve.GetPrimes(9999, 1000).ToList();
+            var primes = ToolBox.PrimeSieve.GetPrimes(9999, 1000).ToList();
 
             for (int i = 0; i < primes.Count; i++)
             {
@@ -62,7 +62,7 @@ namespace csharp.Level02
                     var p3 = p2 + p2 - p1;
                     if (p3>9999 || !IsPermutation(p1, p2) || !IsPermutation(p1, p3))
                         continue;
-                    if (PrimeGenerator.IsPrime(p3))
+                    if (ToolBox.PrimeSieve[p3])
                         return (p1*10000 + p2)*10000 + p3;
                 }
             }

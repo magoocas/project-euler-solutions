@@ -25,8 +25,6 @@
     Url: https://projecteuler.net/problem=43
 */
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 

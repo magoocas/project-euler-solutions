@@ -33,9 +33,9 @@ namespace csharp.Level02
         {
             for (ulong i = 1; i < 2000000; i+=2)
             {
-                if (!PrimeGenerator.PrimeSieve[i])
+                if (!ToolBox.PrimeSieve[i])
                 {
-                    foreach (var prime in PrimeGenerator.PrimeSieve.GetPrimes())
+                    foreach (var prime in ToolBox.PrimeSieve.GetPrimes())
                     {
                         if(prime > i)
                             return i;

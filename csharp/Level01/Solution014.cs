@@ -25,9 +25,7 @@
     Url: https://projecteuler.net/problem=14
 */
 
-using System;
 using System.Collections.Concurrent;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 

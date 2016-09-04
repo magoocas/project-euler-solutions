@@ -22,7 +22,7 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            return ToolBox.GetPrimes(2000000).Aggregate((sum, prime) => sum + prime);
+            return ToolBox.PrimeSieve.GetPrimes(2000000).Aggregate((sum, prime) => sum + prime);
         }
     }
 }
