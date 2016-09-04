@@ -49,7 +49,7 @@ namespace csharp.Level02
         }
         public override object Answer()
         {
-            var primes = ToolBox.PrimeSieve.GetPrimes(9999, 1000).ToList();
+            var primes = ToolBox.PrimeSieve.PrimeRange(1000, 9999).ToList();
 
             for (int i = 0; i < primes.Count; i++)
             {

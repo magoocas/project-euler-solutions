@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 
 namespace csharp.Utility
 {
@@ -64,7 +65,7 @@ namespace csharp.Utility
             ulong lastPrime = 2;
             while (n < number)
             {
-                foreach (ulong prime in GetPrimes(min: lastPrime))
+                foreach (ulong prime in AllPrimes(min: lastPrime))
                 {
                     lastPrime = prime;
                     if (++n == number)
@@ -73,8 +74,19 @@ namespace csharp.Utility
             }
             return lastPrime;
         }
+        
 
-        public IEnumerable<ulong> GetPrimes(ulong max = 0, ulong min = 0)
+        public IEnumerable<ulong> AllPrimes(ulong min = 0)
+        {
+            while (true)
+            {
+                foreach (var prime in PrimeRange(min, 0))
+                    yield return prime;
+                ExpandSieve();
+            }
+        }
+
+        public IEnumerable<ulong> PrimeRange(ulong min, ulong max)
         {
             if(max == 0)
                 max = _maxSieved;

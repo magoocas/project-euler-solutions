@@ -35,7 +35,7 @@ namespace csharp.Level02
             {
                 if (!ToolBox.PrimeSieve[i])
                 {
-                    foreach (var prime in ToolBox.PrimeSieve.GetPrimes())
+                    foreach (var prime in ToolBox.PrimeSieve.AllPrimes())
                     {
                         if(prime > i)
                             return i;

@@ -1,4 +1,4 @@
-/*
+﻿/*
     Problem: 27
 
     Title: Quadratic primes
@@ -46,7 +46,7 @@ namespace csharp.Level02
             var quadratic = new Func<int, int, int, int>((n, a, b) => n*n + a*n + b);
             int maxN = 0, maxA = 0, maxB = 0;
             
-            foreach (var b in ToolBox.PrimeSieve.GetPrimes(1000).Select(p=>(int)p))
+            foreach (var b in ToolBox.PrimeSieve.PrimeRange(0,1000).Select(p=>(int)p))
             {
                 for (int a = -b+2; a < 1000; a++)
                 {

@@ -27,7 +27,7 @@ namespace csharp.Level02
     {
         public override object Answer()
         {
-            var primes = new HashSet<ulong>(ToolBox.PrimeSieve.GetPrimes(10000000));
+            var primes = new HashSet<ulong>(ToolBox.PrimeSieve.PrimeRange(0, 10000000));
             ulong sum = 0;
             var count = 0;
 

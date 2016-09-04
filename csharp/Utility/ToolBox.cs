@@ -66,6 +66,12 @@ namespace csharp.Utility
             return NumberToDigits((ulong) number).Select(n=>(int)n);
         }
 
+        public static ulong DigitsToNumber(ulong[] digits, bool reverse = false)
+        {
+            if(reverse)
+                return DigitsToNumber(digits, digits.Length-1, -digits.Length);
+            return DigitsToNumber(digits, 0, digits.Length);
+        }
         public static ulong DigitsToNumber(ulong[] digits, int start, int count)
         {
             ulong result = 0;

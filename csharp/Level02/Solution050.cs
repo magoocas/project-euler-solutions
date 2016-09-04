@@ -31,7 +31,7 @@ namespace csharp.Level02
         public override object Answer()
         {
 
-            var primes = ToolBox.PrimeSieve.GetPrimes(1000000).ToList();
+            var primes = ToolBox.PrimeSieve.PrimeRange(0, 1000000).ToList();
 
             //establish a reasonable limit for the search
             ulong sum = 0;
