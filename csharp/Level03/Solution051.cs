@@ -30,19 +30,6 @@ namespace csharp.Level03
     {
         public override object Answer()
         {
-            var replaceDigits = new[]
-            {
-                new ulong[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new ulong[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-                new ulong[] {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                new ulong[] {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
-                new ulong[] {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                new ulong[] {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-                new ulong[] {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6},
-                new ulong[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7},
-                new ulong[] {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
-                new ulong[] {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
-            };
 
             foreach (var prime in ToolBox.PrimeSieve.AllPrimes(56003))
             {
@@ -52,10 +39,10 @@ namespace csharp.Level03
                 {
                     var familySize = 0;
                     ulong smallest = 0;
-                    for (int digit = 0; digit <= 9; digit++)
+                    for (ulong digit = 0; digit <= 9; digit++)
                     {
                         for (int i = 0; i < primeDigits.Length; i++)
-                            newNumberDigits[i] = (digitMask & 1ul << i) > 0 ? replaceDigits[digit][i] : primeDigits[i];
+                            newNumberDigits[i] = (digitMask & 1ul << i) > 0 ? digit : primeDigits[i];
 
                         if(newNumberDigits.Last() == 0)
                             continue;

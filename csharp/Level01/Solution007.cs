@@ -14,6 +14,7 @@
     Url: https://projecteuler.net/problem=7
 */
 
+using System.Linq;
 using csharp.Utility;
 
 namespace csharp.Level01
@@ -22,7 +23,9 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            return ToolBox.PrimeSieve.GetNthPrime(10001);
+            return ToolBox.PrimeSieve.AllPrimes()
+                .Select((p, n) => new {p, n})
+                .First(x => x.n == 10000).p;
         }
     }
 }

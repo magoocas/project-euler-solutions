@@ -184,6 +184,17 @@ namespace csharp.Utility
         {
             return (int) Factorial((ulong) number);
         }
+
+        public static ulong DigitFrequency(ulong number)
+        {
+            var digitCounter = new ulong[10];
+            while (number>0)
+            {
+                digitCounter[number%10]++;
+                number /= 10;
+            }
+            return DigitsToNumber(digitCounter);
+        }
     }
 }
 

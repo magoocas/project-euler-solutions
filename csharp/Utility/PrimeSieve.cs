@@ -57,23 +57,6 @@ namespace csharp.Utility
             int bitIndex = (int)num % BitCount;
             return !_internalList[listIndex][bitIndex];
         }
-
-        public ulong GetNthPrime(int number)
-        {
-            int n = 0;
-
-            ulong lastPrime = 2;
-            while (n < number)
-            {
-                foreach (ulong prime in AllPrimes(min: lastPrime))
-                {
-                    lastPrime = prime;
-                    if (++n == number)
-                        break;
-                }
-            }
-            return lastPrime;
-        }
         
 
         public IEnumerable<ulong> AllPrimes(ulong min = 0)
