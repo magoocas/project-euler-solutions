@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace csharp.Utility
 {
@@ -171,6 +171,14 @@ namespace csharp.Utility
                 yield return divisor;
             }
 
+        }
+
+        public static BigInteger Factorial(BigInteger number)
+        {
+            BigInteger result = 1;
+            while (number > 1)
+                result *= number--;
+            return result;
         }
         public static ulong Factorial(ulong number)
         {

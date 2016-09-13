@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\PrimeTests.cs" />
+    <Compile Include="Utility\Combinatorics.cs" />
     <Compile Include="Utility\Logic.cs" />
     <Compile Include="Utility\Pandigital.cs" />
     <Compile Include="SolutionBase.cs" />
@@ -59,6 +60,9 @@
     <Compile Include="Tests\ToolBoxTests.cs" />
     <Compile Include="Tests\SolutionTests.cs" />
     <Compile Include="Tests\SolutionTestCase.cs" />
+    <Compile Include="Utility\Poker\Card.cs" />
+    <Compile Include="Utility\Poker\Hand.cs" />
+    <Compile Include="Utility\Poker\HandType.cs" />
     <Compile Include="Utility\PrimeSieve.cs" />
     <Compile Include="Utility\Rational.cs" />
     <Compile Include="Utility\TimeThis.cs" />
@@ -116,6 +120,8 @@
     <Compile Include="Level03\Solution067.cs" />
     <Compile Include="Level03\Solution051.cs" />
     <Compile Include="Level03\Solution052.cs" />
+    <Compile Include="Level03\Solution053.cs" />
+    <Compile Include="Level03\Solution054.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
