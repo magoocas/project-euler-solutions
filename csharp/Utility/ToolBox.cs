@@ -26,7 +26,7 @@ namespace csharp.Utility
             return count==maxDigit;
         }
 
-        public static bool IsPalindrome(int number, int numberBase)
+        public static bool IsPalindrome(ulong number, ulong numberBase)
         {
             var num = number;
             var palindrome = num % numberBase;

@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -34,15 +34,15 @@
       <HintPath>packages\BigRationalLibrary.1.0.0.0\lib\NETFramework40\BigRationalLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System"/>
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Numerics"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    <Reference Include="Microsoft.CSharp"/>
+    <Reference Include="System.Data"/>
+    <Reference Include="System.Net.Http"/>
+    <Reference Include="System.Xml"/>
     <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823">
       <HintPath>packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
@@ -51,89 +51,90 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tests\PrimeTests.cs" />
-    <Compile Include="Utility\Combinatorics.cs" />
-    <Compile Include="Utility\Logic.cs" />
-    <Compile Include="Utility\Pandigital.cs" />
-    <Compile Include="SolutionBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\ToolBoxTests.cs" />
-    <Compile Include="Tests\SolutionTests.cs" />
-    <Compile Include="Tests\SolutionTestCase.cs" />
-    <Compile Include="Utility\Poker\Card.cs" />
-    <Compile Include="Utility\Poker\Hand.cs" />
-    <Compile Include="Utility\Poker\HandType.cs" />
-    <Compile Include="Utility\PrimeSieve.cs" />
-    <Compile Include="Utility\Rational.cs" />
-    <Compile Include="Utility\TimeThis.cs" />
-    <Compile Include="Utility\ToolBox.cs" />
-    <Compile Include="Level01\Solution001.cs" />
-    <Compile Include="Level01\Solution002.cs" />
-    <Compile Include="Level01\Solution003.cs" />
-    <Compile Include="Level01\Solution004.cs" />
-    <Compile Include="Level01\Solution005.cs" />
-    <Compile Include="Level01\Solution006.cs" />
-    <Compile Include="Level01\Solution007.cs" />
-    <Compile Include="Level01\Solution008.cs" />
-    <Compile Include="Level01\Solution009.cs" />
-    <Compile Include="Level01\Solution010.cs" />
-    <Compile Include="Level01\Solution011.cs" />
-    <Compile Include="Level01\Solution012.cs" />
-    <Compile Include="Level01\Solution013.cs" />
-    <Compile Include="Level01\Solution014.cs" />
-    <Compile Include="Level01\Solution015.cs" />
-    <Compile Include="Level01\Solution016.cs" />
-    <Compile Include="Level01\Solution017.cs" />
-    <Compile Include="Level01\Solution018.cs" />
-    <Compile Include="Level01\Solution019.cs" />
-    <Compile Include="Level01\Solution020.cs" />
-    <Compile Include="Level01\Solution021.cs" />
-    <Compile Include="Level01\Solution022.cs" />
-    <Compile Include="Level01\Solution023.cs" />
-    <Compile Include="Level01\Solution024.cs" />
-    <Compile Include="Level01\Solution025.cs" />
-    <Compile Include="Level02\Solution026.cs" />
-    <Compile Include="Level02\Solution027.cs" />
-    <Compile Include="Level02\Solution028.cs" />
-    <Compile Include="Level02\Solution029.cs" />
-    <Compile Include="Level02\Solution030.cs" />
-    <Compile Include="Level02\Solution031.cs" />
-    <Compile Include="Level02\Solution032.cs" />
-    <Compile Include="Level02\Solution033.cs" />
-    <Compile Include="Level02\Solution034.cs" />
-    <Compile Include="Level02\Solution035.cs" />
-    <Compile Include="Level02\Solution036.cs" />
-    <Compile Include="Level02\Solution037.cs" />
-    <Compile Include="Level02\Solution038.cs" />
-    <Compile Include="Level02\Solution039.cs" />
-    <Compile Include="Level02\Solution040.cs" />
-    <Compile Include="Level02\Solution041.cs" />
-    <Compile Include="Level02\Solution042.cs" />
-    <Compile Include="Level02\Solution043.cs" />
-    <Compile Include="Level02\Solution044.cs" />
-    <Compile Include="Level02\Solution045.cs" />
-    <Compile Include="Level02\Solution046.cs" />
-    <Compile Include="Level02\Solution047.cs" />
-    <Compile Include="Level02\Solution048.cs" />
-    <Compile Include="Level02\Solution049.cs" />
-    <Compile Include="Level02\Solution050.cs" />
-    <Compile Include="Level03\Solution067.cs" />
-    <Compile Include="Level03\Solution051.cs" />
-    <Compile Include="Level03\Solution052.cs" />
-    <Compile Include="Level03\Solution053.cs" />
-    <Compile Include="Level03\Solution054.cs" />
+    <Compile Include="Tests\PrimeTests.cs"/>
+    <Compile Include="Utility\Combinatorics.cs"/>
+    <Compile Include="Utility\Logic.cs"/>
+    <Compile Include="Utility\Pandigital.cs"/>
+    <Compile Include="SolutionBase.cs"/>
+    <Compile Include="Properties\AssemblyInfo.cs"/>
+    <Compile Include="Tests\ToolBoxTests.cs"/>
+    <Compile Include="Tests\SolutionTests.cs"/>
+    <Compile Include="Tests\SolutionTestCase.cs"/>
+    <Compile Include="Utility\Poker\Card.cs"/>
+    <Compile Include="Utility\Poker\Hand.cs"/>
+    <Compile Include="Utility\Poker\HandType.cs"/>
+    <Compile Include="Utility\PrimeSieve.cs"/>
+    <Compile Include="Utility\Rational.cs"/>
+    <Compile Include="Utility\TimeThis.cs"/>
+    <Compile Include="Utility\ToolBox.cs"/>
+    <Compile Include="Level01\Solution001.cs"/>
+    <Compile Include="Level01\Solution002.cs"/>
+    <Compile Include="Level01\Solution003.cs"/>
+    <Compile Include="Level01\Solution004.cs"/>
+    <Compile Include="Level01\Solution005.cs"/>
+    <Compile Include="Level01\Solution006.cs"/>
+    <Compile Include="Level01\Solution007.cs"/>
+    <Compile Include="Level01\Solution008.cs"/>
+    <Compile Include="Level01\Solution009.cs"/>
+    <Compile Include="Level01\Solution010.cs"/>
+    <Compile Include="Level01\Solution011.cs"/>
+    <Compile Include="Level01\Solution012.cs"/>
+    <Compile Include="Level01\Solution013.cs"/>
+    <Compile Include="Level01\Solution014.cs"/>
+    <Compile Include="Level01\Solution015.cs"/>
+    <Compile Include="Level01\Solution016.cs"/>
+    <Compile Include="Level01\Solution017.cs"/>
+    <Compile Include="Level01\Solution018.cs"/>
+    <Compile Include="Level01\Solution019.cs"/>
+    <Compile Include="Level01\Solution020.cs"/>
+    <Compile Include="Level01\Solution021.cs"/>
+    <Compile Include="Level01\Solution022.cs"/>
+    <Compile Include="Level01\Solution023.cs"/>
+    <Compile Include="Level01\Solution024.cs"/>
+    <Compile Include="Level01\Solution025.cs"/>
+    <Compile Include="Level02\Solution026.cs"/>
+    <Compile Include="Level02\Solution027.cs"/>
+    <Compile Include="Level02\Solution028.cs"/>
+    <Compile Include="Level02\Solution029.cs"/>
+    <Compile Include="Level02\Solution030.cs"/>
+    <Compile Include="Level02\Solution031.cs"/>
+    <Compile Include="Level02\Solution032.cs"/>
+    <Compile Include="Level02\Solution033.cs"/>
+    <Compile Include="Level02\Solution034.cs"/>
+    <Compile Include="Level02\Solution035.cs"/>
+    <Compile Include="Level02\Solution036.cs"/>
+    <Compile Include="Level02\Solution037.cs"/>
+    <Compile Include="Level02\Solution038.cs"/>
+    <Compile Include="Level02\Solution039.cs"/>
+    <Compile Include="Level02\Solution040.cs"/>
+    <Compile Include="Level02\Solution041.cs"/>
+    <Compile Include="Level02\Solution042.cs"/>
+    <Compile Include="Level02\Solution043.cs"/>
+    <Compile Include="Level02\Solution044.cs"/>
+    <Compile Include="Level02\Solution045.cs"/>
+    <Compile Include="Level02\Solution046.cs"/>
+    <Compile Include="Level02\Solution047.cs"/>
+    <Compile Include="Level02\Solution048.cs"/>
+    <Compile Include="Level02\Solution049.cs"/>
+    <Compile Include="Level02\Solution050.cs"/>
+    <Compile Include="Level03\Solution067.cs"/>
+    <Compile Include="Level03\Solution051.cs"/>
+    <Compile Include="Level03\Solution052.cs"/>
+    <Compile Include="Level03\Solution053.cs"/>
+    <Compile Include="Level03\Solution054.cs"/>
+    <Compile Include="Level03\Solution055.cs"/>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   -->
   <Target Name="BeforeBuild">
     <ItemGroup>
-      <ProblemDataFiles Include="$(ProjectDir)\..\data\**\*.*" />
+      <ProblemDataFiles Include="$(ProjectDir)\..\data\**\*.*"/>
     </ItemGroup>
-    <Copy SourceFiles="@(ProblemDataFiles)" DestinationFolder="$(TargetDir)\ProblemData\%(RecursiveDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ProblemDataFiles)" DestinationFolder="$(TargetDir)\ProblemData\%(RecursiveDir)" SkipUnchangedFiles="true"/>
   </Target>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config"/>
   </ItemGroup>
 </Project>

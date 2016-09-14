@@ -59,6 +59,8 @@
 */
 
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using csharp.Utility.Poker;
 
@@ -68,16 +70,16 @@ namespace csharp.Level03
     {
         public override object Answer()
         {
-            var deals = GetProblemDataAsMatrix("\r\n", " ", s=>new Card(s));
-           
+            var deals = GetProblemDataAsMatrix("\r\n", " ", s => new Card(s));
             return deals.Count(deal =>
             {
                 var hand1 = new Hand(deal.Take(5));
                 var hand2 = new Hand(deal.Skip(5));
-               
+
                 return hand1.CompareTo(hand2) > 0;
             });
         }
     }
+    
 }
 

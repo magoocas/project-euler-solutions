@@ -24,8 +24,8 @@ namespace csharp.Level02
     {
         public override object Answer()
         {
-            int sum = 0;
-            for (int i = 1; i < 1000000; i++)
+            ulong sum = 0;
+            for (ulong i = 1; i < 1000000; i++)
             {
                 if(i%10 == 0)
                     continue;

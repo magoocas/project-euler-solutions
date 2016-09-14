@@ -22,10 +22,10 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            var products = new List<int>();
+            var products = new List<ulong>();
 
-            for (var i = 100; i <= 999; i++)
-                for (var j = i; j <= 999; j++)
+            for (ulong i = 100; i <= 999; i++)
+                for (ulong j = i; j <= 999; j++)
                     products.Add(i*j);
 
             return products.Distinct()
