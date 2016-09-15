@@ -95,6 +95,11 @@ namespace csharp.Utility
             return !Equals(a, b);
         }
 
+        public static implicit operator Rational(int n)
+        {
+            return new Rational(n,1);
+        }
+
         public override string ToString()
         {
             return $"{Numerator}/{Denominator}";
