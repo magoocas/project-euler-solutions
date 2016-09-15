@@ -115,27 +115,25 @@ namespace csharp.Utility
                 yield return number;
                 yield break;
             }
-
-            var numberToFactor = number;
-            ulong potentialPrime = 2;
-            while (potentialPrime*2 <= numberToFactor)
+            
+            foreach (var prime in PrimeSieve.AllPrimes())
             {
-                var quotient = numberToFactor/potentialPrime;
-                var remainder = numberToFactor%potentialPrime;
-
-                if (remainder == 0)
+                while (prime * prime <= number)
                 {
-                    yield return potentialPrime;
-                    numberToFactor = quotient;
-                }
-                else if (potentialPrime == 2)
-                    potentialPrime = 3;
-                else
-                    potentialPrime = potentialPrime + 2;
-            }
+                    var quotient = number / prime;
+                    var remainder = number % prime;
 
-            if (numberToFactor > 0)
-                yield return numberToFactor;
+                    if (remainder != 0)
+                        break;
+                    yield return prime;
+                    number = quotient;
+                }
+
+                if(prime* prime > number)
+                    break;
+            }
+            if (number > 0)
+                yield return number;
         }
         
         public static IEnumerable<ulong> GetDivisors(ulong number, bool proper = false)

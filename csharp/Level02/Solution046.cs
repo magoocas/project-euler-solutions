@@ -31,7 +31,7 @@ namespace csharp.Level02
     {
         public override object Answer()
         {
-            for (ulong i = 1; i < 2000000; i+=2)
+            for (ulong i = 3; i < 2000000; i+=2)
             {
                 if (!ToolBox.PrimeSieve[i])
                 {

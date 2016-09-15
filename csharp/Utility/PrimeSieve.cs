@@ -21,19 +21,18 @@ namespace csharp.Utility
         private const int BitCount = 32;
         private const int SegmentSize = 32768;
         private List<PrimeBitVector> _internalList;
-        private static List<int> _nextCache;
-        private static List<int> _smallPrimeCache;
-        private static List<bool> _smallPrimeSieve;
-        private static ulong _s;
-        private static ulong _maxSieved;
-        private static int _cachedPrimeCount;
+        private List<int> _nextCache;
+        private List<int> _smallPrimeCache;
+        private List<bool> _smallPrimeSieve;
+        private List<ulong> _largePrimeCache; 
+        private ulong _s;
+        private ulong _maxSieved;
 
 
         public PrimeSieve()
         {
             Clear();
         }
-        public int Count => _cachedPrimeCount;
         public bool this[ulong num] => IsPrime(num);
         public bool this[int num] => IsPrime((ulong)num);
 
@@ -43,6 +42,7 @@ namespace csharp.Utility
             _nextCache = new List<int>();
             _smallPrimeCache = new List<int>();
             _smallPrimeSieve = new List<bool>();
+            _largePrimeCache = new List<ulong>();
             _s = 2;
             _maxSieved = 0;
         }
@@ -50,56 +50,44 @@ namespace csharp.Utility
         {
             if (num % 2 == 0)
                 return num==2;
+            if (num < 2)
+                return false;
             if (num > _maxSieved)
                 ExpandSieve(num);
             int listIndex = (int)num / BitCount;
             int bitIndex = (int)num % BitCount;
             return !_internalList[listIndex][bitIndex];
         }
-        
 
-        public IEnumerable<ulong> AllPrimes(ulong min = 0)
+        public ulong GetNthPrime(int n)
         {
-            while (true)
-            {
-                foreach (var prime in PrimeRange(min, 0))
-                    yield return prime;
+            while(n > _largePrimeCache.Count)
                 ExpandSieve();
-            }
+            return _largePrimeCache[n-1];
+        }
+
+        public IEnumerable<ulong> AllPrimes(ulong min = 2)
+        {
+            return PrimeRange(min, ulong.MaxValue);
         }
 
         public IEnumerable<ulong> PrimeRange(ulong min, ulong max)
         {
-            if(max == 0)
-                max = _maxSieved;
-
-            if (max > _maxSieved)
-                ExpandSieve(max);
-
-            if(min<=2)
-                yield return 2;
-
-            if(min < 3)
-                min = 3;
-
-            ulong n=min;
-            if ((min & 1) == 0)
-                n++;
-            int j = (int)n % BitCount;
-            for (int i = (int) n/BitCount; i < _internalList.Count; i++)
+            ExpandSieve(min<2?2:min);
+            var i = 0;
+            for (; _largePrimeCache[i] < min; i++) ;
+            
+            for (;_largePrimeCache[i] <= max;i++)
             {
-                for (; j < BitCount; j+=2, n+=2)
-                {
-                    if (!_internalList[i][j])
-                        yield return n;
-                    if (n > max)
-                        yield break;
-                }
-                j = 1;
+                yield return _largePrimeCache[i];
+
+                if (i+1 >= _largePrimeCache.Count)
+                    ExpandSieve();
             }
+
         }
 
-        private void AddSegment(bool[] sieveSegment)
+        private void AddSegment(ulong segmentLow, bool[] sieveSegment)
         {
             int segmentCount = sieveSegment.Length / BitCount;
             for (int i = 0; i < segmentCount; i++)
@@ -107,15 +95,17 @@ namespace csharp.Utility
                 int value = 0;
                 for (int j = 0; j < BitCount; j++)
                 {
-                    if (sieveSegment[i*BitCount + j])
+                    var p = i*BitCount + j;
+                    if (sieveSegment[p])
                         value = unchecked(value | 1 << j);
-                    else
-                        _cachedPrimeCount++;
-
+                    else if(p%2 > 0)
+                        _largePrimeCache.Add(segmentLow + (ulong) p);
                 }
                 _internalList.Add(new PrimeBitVector(value));
             }
             _maxSieved += (ulong)sieveSegment.Length;
+            if (segmentLow == 0)
+                _largePrimeCache[0] = 2;
         }
 
         private void ExpandSieve(ulong limit = 0)
@@ -171,8 +161,7 @@ namespace csharp.Utility
                         sieve[j] = true;
                     _nextCache[i] = j - SegmentSize;
                 }
-
-                AddSegment(sieve);
+                AddSegment(low, sieve);
             }
             _maxSieved = limit;
         }

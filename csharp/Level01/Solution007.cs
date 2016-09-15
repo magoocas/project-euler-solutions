@@ -23,9 +23,7 @@ namespace csharp.Level01
     {
         public override object Answer()
         {
-            return ToolBox.PrimeSieve.AllPrimes()
-                .Select((p, n) => new {p, n})
-                .First(x => x.n == 10000).p;
+            return ToolBox.PrimeSieve.GetNthPrime(10001);
         }
     }
 }
