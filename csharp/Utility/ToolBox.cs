@@ -47,7 +47,19 @@ namespace csharp.Utility
             }
             return result;
         }
-       
+
+        public static IEnumerable<int> NumberToDigits(BigInteger number, int width = 0)
+        {
+            var digitCount = 0;
+            while (number > 0)
+            {
+                yield return (int)(number % 10);
+                number /= 10;
+                digitCount++;
+            }
+            while (digitCount++ < width)
+                yield return 0;
+        }
         public static IEnumerable<ulong> NumberToDigits(ulong number, int width = 0)
         {
             var digitCount = 0;
@@ -57,7 +69,7 @@ namespace csharp.Utility
                 number /= 10;
                 digitCount++;
             }
-            if (digitCount < width)
+            while (digitCount++ < width)
                 yield return 0;
         }
 
