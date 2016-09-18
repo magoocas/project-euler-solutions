@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tests\PrimeTests.cs" />
-    <Compile Include="Utility\ArrayEx.cs" />
     <Compile Include="Utility\Combinatorics.cs" />
     <Compile Include="Utility\Logic.cs" />
     <Compile Include="Utility\Pandigital.cs" />
