@@ -15,6 +15,9 @@
         
 
     Url: https://projecteuler.net/problem=60
+    
+    References:
+        https://projecteuler.net/thread=60;post=3006
 */
 
 using System;
@@ -26,27 +29,6 @@ namespace csharp.Level03
 {
     public class Solution060 : SolutionBase
     {
-
-        private IEnumerable<Tuple<ulong,ulong,ulong>> GetSubPrimes(ulong prime, ulong min)
-        {
-            var digits = ToolBox.NumberToDigits(prime).ToArray();
-            for (int i = 1; i < digits.Length; i++)
-            {
-                if(digits[i-1]==0)
-                    continue;
-                var n1 = ToolBox.DigitsToNumber(digits, 0, i);
-                var n2 = ToolBox.DigitsToNumber(digits, i, digits.Length - i);
-                if (n1 == n2 || n1 < min || n2 < min)
-                    continue;
-                if (ToolBox.PrimeSieve.IsPrime(n1) && ToolBox.PrimeSieve.IsPrime(n2))
-                {
-                    var otherPrime = ToolBox.Concatenate(n1,n2);
-                    if(ToolBox.PrimeSieve.IsPrime(otherPrime))
-                        yield return Tuple.Create(n1, n2,otherPrime);
-                }
-            }
-        }
-
         public bool Find(Dictionary<ulong,HashSet<ulong>> lookup, HashSet<ulong> set, HashSet<ulong> intersected, int size, int depth=1)
         {
             if (depth == size)
@@ -72,39 +54,44 @@ namespace csharp.Level03
 
         public override object Answer()
         {
-            
-            ulong max = 100000000;
+            ulong max = 10000; 
+            int size = 5;
+            var primes = ToolBox.PrimeSieve.PrimeRange(2, max).ToArray();
             var lookup = new Dictionary<ulong,HashSet<ulong>>();
-            var tracker = new HashSet<ulong>();
-            foreach (var prime in ToolBox.PrimeSieve.PrimeRange(13, max))
-            {
-                if(tracker.Contains(prime))
-                    continue;
-                foreach (var subPrimePair in GetSubPrimes(prime, 13)) //setting min to 13 is a hack (only works because I already discovered 13 was the first number in the set), to test faster (~10s vs. ~2min)
-                {
-                    HashSet<ulong> hashSet;
-                    if (!lookup.TryGetValue(subPrimePair.Item1, out hashSet))
-                        lookup[subPrimePair.Item1] = hashSet = new HashSet<ulong> {subPrimePair.Item1};
-                    hashSet.Add(subPrimePair.Item2);
 
-                    if (!lookup.TryGetValue(subPrimePair.Item2, out hashSet))
-                        lookup[subPrimePair.Item2] = hashSet = new HashSet<ulong> {subPrimePair.Item2};
-                    hashSet.Add(subPrimePair.Item1);
-                    
-                    tracker.Add(subPrimePair.Item3);
+            for (int i = 0; i < primes.Length; i++)
+            {
+                for (int j = i + 1; j < primes.Length; j++)
+                {
+                    var p1 = primes[i];
+                    var p2 = primes[j];
+
+                    var n1 = ToolBox.Concatenate(p1, p2);
+                    if (!ToolBox.PrimeSieve.IsPrime(n1))
+                        continue;
+
+                    var n2 = ToolBox.Concatenate(p2, p1);
+                    if (!ToolBox.PrimeSieve.IsPrime(n2))
+                        continue;
+
+                    lookup.GetValueOrNew(p1, () => new HashSet<ulong> {p1}).Add(p2);
+                    lookup.GetValueOrNew(p2, () => new HashSet<ulong> {p2}).Add(p1);
+
                 }
             }
+
             var sets = lookup.Values.OrderByDescending(s => s.Count).ToList();
-            
+
             for (int i = 0; i < sets.Count; i++)
             {
-                var intersected = new HashSet<ulong> {sets[i].First()};
-                if (Find(lookup, sets[i], intersected, 5))
+                var intersected = new HashSet<ulong> { sets[i].First() };
+                if (Find(lookup, sets[i], intersected, size))
                 {
-                    Console.WriteLine($"Set: {intersected.Aggregate("",(a,b)=>$"{a},{b}")}");
+                    Console.WriteLine($"Set:{intersected.Aggregate("", (a, b) => $"{a} [{b}]")}");
                     return intersected.Aggregate(0ul, (a, b) => a + b);
                 }
             }
+
             return 0;
         }
     }

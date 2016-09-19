@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Tests\PrimeTests.cs" />
     <Compile Include="Utility\Combinatorics.cs" />
+    <Compile Include="Utility\DictionaryEx.cs" />
     <Compile Include="Utility\Pandigital.cs" />
     <Compile Include="SolutionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
