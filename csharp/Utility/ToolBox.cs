@@ -213,6 +213,13 @@ namespace csharp.Utility
             }
             return DigitsToNumber(digitCounter);
         }
+
+        public static ulong Concatenate(ulong a, ulong b)
+        {
+            ulong order = 1;
+            while ((order *= 10) < b) ;
+            return a*order + b;
+        }
     }
 }
 

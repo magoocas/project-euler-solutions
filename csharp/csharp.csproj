@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="Tests\PrimeTests.cs" />
     <Compile Include="Utility\Combinatorics.cs" />
-    <Compile Include="Utility\Logic.cs" />
     <Compile Include="Utility\Pandigital.cs" />
     <Compile Include="SolutionBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +126,7 @@
     <Compile Include="Level03\Solution057.cs" />
     <Compile Include="Level03\Solution058.cs" />
     <Compile Include="Level03\Solution059.cs" />
+    <Compile Include="Level03\Solution060.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

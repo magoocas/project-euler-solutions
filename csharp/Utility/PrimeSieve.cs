@@ -142,7 +142,7 @@ namespace csharp.Utility
                 bool[] sieve = new bool[SegmentSize];
 
                 // current segment = interval [low, high]
-                ulong high = Logic.Min(low + SegmentSize - 1, limit);
+                ulong high = Math.Min(low + SegmentSize - 1, limit);
 
                 // store small primes needed to cross off multiples
                 for (; _s * _s <= high; _s++)
