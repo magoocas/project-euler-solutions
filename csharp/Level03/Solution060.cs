@@ -17,11 +17,12 @@
     Url: https://projecteuler.net/problem=60
     
     References:
-        https://projecteuler.net/thread=60;post=3006
+        https://projecteuler.net/thread=60;post=731
 */
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using csharp.Utility;
 
@@ -29,70 +30,51 @@ namespace csharp.Level03
 {
     public class Solution060 : SolutionBase
     {
-        public bool Find(Dictionary<ulong,HashSet<ulong>> lookup, HashSet<ulong> set, HashSet<ulong> intersected, int size, int depth=1)
+        private const int Max = 1200;
+        private int[,] _check = new int[Max, Max];
+
+        public bool Check(int i, int j)
         {
-            if (depth == size)
-                return true;
-            foreach (var n in set.Skip(depth))
+            if (_check[i, j] == 0)
             {
-                if (intersected.Contains(n))
-                    continue;
-                var subSet = new HashSet<ulong>(set);
-                var otherSet = lookup[n];
-                if(!subSet.Contains(otherSet.First()))
-                    continue;
-                subSet.IntersectWith(lookup[n]);
-                if(subSet.Count < size)
-                    continue;
-                intersected.Add(n);
-                if (Find(lookup, subSet, intersected, size, depth+1))
+                var prime1 = ToolBox.PrimeSieve.GetNthPrime(i);
+                var prime2 = ToolBox.PrimeSieve.GetNthPrime(j);
+
+                var newprime1 = ToolBox.Concatenate(prime1, prime2);
+                var newprime2 = ToolBox.Concatenate(prime2, prime1);
+                _check[i, j] = ToolBox.PrimeSieve[newprime1] ? 1 : -1;
+                _check[j, i] = ToolBox.PrimeSieve[newprime2] ? 1 : -1;
+            }
+            return _check[i, j] == 1 && _check[j, i] == 1;
+        }
+
+        public bool Find(int[] matches, int matchDepth, int requiredDepth, int max, int currentPrime)
+        {
+            if (matchDepth == requiredDepth)
+                return true;
+
+            for (int i = 0; i < matchDepth; i++)
+                if (!Check(currentPrime, matches[i]))
+                    return false;
+
+            matches[matchDepth] = currentPrime;
+
+            var localMax = max - requiredDepth + matchDepth;
+            for (int i = 1; i < localMax; i++)
+            {
+                if (Find(matches, matchDepth + 1, requiredDepth,max, i + 1))
                     return true;
-                intersected.Remove(n);
             }
             return false;
         }
 
         public override object Answer()
         {
-            ulong max = 10000; 
-            int size = 5;
-            var primes = ToolBox.PrimeSieve.PrimeRange(2, max).ToArray();
-            var lookup = new Dictionary<ulong,HashSet<ulong>>();
-
-            for (int i = 0; i < primes.Length; i++)
-            {
-                for (int j = i + 1; j < primes.Length; j++)
-                {
-                    var p1 = primes[i];
-                    var p2 = primes[j];
-
-                    var n1 = ToolBox.Concatenate(p1, p2);
-                    if (!ToolBox.PrimeSieve.IsPrime(n1))
-                        continue;
-
-                    var n2 = ToolBox.Concatenate(p2, p1);
-                    if (!ToolBox.PrimeSieve.IsPrime(n2))
-                        continue;
-
-                    lookup.GetValueOrNew(p1, () => new HashSet<ulong> {p1}).Add(p2);
-                    lookup.GetValueOrNew(p2, () => new HashSet<ulong> {p2}).Add(p1);
-
-                }
-            }
-
-            var sets = lookup.Values.OrderByDescending(s => s.Count).ToList();
-
-            for (int i = 0; i < sets.Count; i++)
-            {
-                var intersected = new HashSet<ulong> { sets[i].First() };
-                if (Find(lookup, sets[i], intersected, size))
-                {
-                    Console.WriteLine($"Set:{intersected.Aggregate("", (a, b) => $"{a} [{b}]")}");
-                    return intersected.Aggregate(0ul, (a, b) => a + b);
-                }
-            }
-
-            return 0;
+            var matches = new int[5];
+            for (int i = 1; i < Max - 4; i++)
+                if (Find(matches, 0, 5, Max, i))
+                    break;
+            return matches.Aggregate(0ul,(a,b)=>a+ToolBox.PrimeSieve.GetNthPrime(b));
         }
     }
 }
