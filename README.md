@@ -7,6 +7,6 @@ Solutions to Project Euler problems
   - [html-xml-tools](http://www.w3.org/Tools/HTML-XML-utils/)
   - w3m
 
-## addans script prerequisites
+## edit_answers script prerequisites
   - vipe (https://joeyh.name/code/moreutils/)
   - gpg
