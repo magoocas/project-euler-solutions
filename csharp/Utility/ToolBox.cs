@@ -220,6 +220,33 @@ namespace csharp.Utility
             while ((order *= 10) < b) ;
             return a*order + b;
         }
+
+
+        //reference: http://stackoverflow.com/a/23718676/4912869
+        public static IEnumerable<List<T>> Permutate<T>(IEnumerable<T> source)
+        {
+            var input = source.ToList();
+
+            if (input.Count == 2) // this are permutations of array of size 2
+            {
+                yield return new List<T>(input);
+                yield return new List<T> { input[1], input[0] };
+            }
+            else
+            {
+                foreach (T elem in input) // going through array
+                {
+                    var rlist = new List<T>(input); // creating subarray = array
+                    rlist.Remove(elem); // removing element
+                    foreach (List<T> retlist in Permutate(rlist))
+                    {
+                        retlist.Insert(0, elem); // inserting the element at pos 0
+                        yield return retlist;
+                    }
+
+                }
+            }
+        }
     }
 }
 

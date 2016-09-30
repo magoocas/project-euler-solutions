@@ -20,9 +20,6 @@
         https://projecteuler.net/thread=60;post=731
 */
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using csharp.Utility;
 
