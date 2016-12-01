@@ -6,5 +6,4 @@ script:
   - xbuild /p:Configuration=Release csharp/csharp.sln
   - mono ./testrunner/NUnit.Console.3.0.1/tools/nunit3-console.exe ./csharp/bin/Release/csharp.dll
 before_install:
-  - echo $answer_password
   - echo $answer_password | gpg --passphrase-fd 0 -o data/Answers.txt data/Answers.txt.gpg
