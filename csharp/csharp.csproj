@@ -131,6 +131,8 @@
     <Compile Include="Level03\Solution061.cs" />
     <Compile Include="Level03\Solution062.cs" />
     <Compile Include="Level03\Solution063.cs" />
+    <Compile Include="Level03\Solution064.cs" />
+    <Compile Include="Level03\Solution065.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
