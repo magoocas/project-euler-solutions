@@ -74,6 +74,7 @@ namespace csharp.Level03
     {
         public override object Answer()
         {
+            return 0;
             int m = 1;
             int result = 0;
             for (int n = 2; n <= 10000; n++)
